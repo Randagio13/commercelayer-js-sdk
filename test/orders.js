@@ -22,10 +22,10 @@ order.return_url = 'https://commercelayer.io';
 order.privacy_url = 'https://commercelayer.io';
 order.terms_url = 'https://commercelayer.io';
 
-let address = new commercelayer.model.Address({id:100});
+let address = new commercelayer.model.Address(100);
 order.shipping_address = address;
 
-let market = new commercelayer.model.Market({id:200});
+let market = new commercelayer.model.Market(200);
 // order.market = {id:200};
 order.market = market;
 
