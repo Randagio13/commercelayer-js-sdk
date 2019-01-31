@@ -1,0 +1,38 @@
+{
+  "name": "@commercelayer/commercelayer-js-sdk",
+  "version": "1.0.4",
+  "description": "The Official Commerce Layer JS SDK",
+  "main": "./index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --progress",
+    "watch": "webpack --progress --watch",
+    "start": "webpack-dev-server --open"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/commercelayer/commercelayer-js-sdk.git"
+  },
+  "keywords": [
+    "jamstack",
+    "headless",
+    "ecommerce",
+    "api"
+  ],
+  "author": "Pierluigi Viti <pierluigi@commercelayer.io>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/commercelayer/commercelayer-js-sdk/issues"
+  },
+  "homepage": "https://github.com/commercelayer/commercelayer-js-sdk#readme",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "json-api-normalize": "^1.1.5"
+  },
+  "devDependencies": {
+    "util": "^0.11.1",
+    "webpack": "^4.29.0",
+    "webpack-cli": "^3.2.1",
+    "webpack-dev-server": "^3.1.14"
+  }
+}
