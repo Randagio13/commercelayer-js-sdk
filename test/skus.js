@@ -19,12 +19,18 @@ let qf = new commercelayer.query.QueryFilter()
     .include('prices')
     .page(null, 25);
 
-test.execute(commercelayer.listSkus(qf))
-.then(response => {
-    if (!commercelayer.settings.raw_response) console.log(response.get('code'))
-});
+// test.execute(commercelayer.listSkus(qf))
+// .then(response => {
+//     if (!commercelayer.settings.raw_response) console.log(response.get('code'))
+// });
 
 
 // test.separator('retrieveSku()');
 // test.execute(commercelayer.retrieveSku(31472), false);
-    
+
+
+
+commercelayer.listSkus(qf).then(response => { console.log('1111111111'+response.get('code')) }).catch(err => console.log(err));
+commercelayer.listSkus(qf).then(response => { console.log('2222222222'+response.get('code')) }).catch(err => console.log(err));
+commercelayer.listSkus(qf).then(response => { console.log('3333333333'+response.get('code')) }).catch(err => console.log(err));
+commercelayer.listSkus(qf).then(response => { console.log('4444444444'+response.get('code')) }).catch(err => console.log(err));
