@@ -21,6 +21,4 @@ line_item.item = new commercelayer.model.Sku(31472);
 
 test.execute(commercelayer.createLineItem(line_item));
 
-test.execute(commerceLayer())
-
 
