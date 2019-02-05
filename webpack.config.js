@@ -1,11 +1,12 @@
 const path = require("path");
-
+require('@babel/register')
 
 // Development Bundle Configuration
-let developmentBundle = {
+const developmentBundle = {
   mode: "development",
   entry: "./index.js",
   devtool: "inline-source-map",
+  // devtool: "source-map",
   devServer: {
     contentBase: "./test/web"
   },
@@ -13,23 +14,46 @@ let developmentBundle = {
     filename: "commercelayer-sdk.dev.js",
     path: path.resolve(__dirname, "dist"),
     library: "commercelayer"
+  },
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader",
+          options: {
+            presets: ['@babel/preset-env']
+          }
+        }
+      }
+    ]
   }
 };
 
-
 // Production Bundle Configuration
-let productionBundle = {
+const productionBundle = {
   mode: "production",
   entry: "./index.js",
   output: {
     filename: "commercelayer-sdk.min.js",
     path: path.resolve(__dirname, "dist"),
     library: "commercelayer"
+  },
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader",
+          options: {
+            presets: ['@babel/preset-env']
+          }
+        }
+      }
+    ]
   }
 };
 
-
-module.exports = [
-  developmentBundle,
-  productionBundle
-];
+module.exports = [developmentBundle, productionBundle];
