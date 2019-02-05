@@ -29,18 +29,18 @@ let market = new commercelayer.model.Market(200);
 // order.market = {id:200};
 order.market = market;
 
-// order = {
-//     data: {
-//       type: 'orders',
-//       attributes: {
-//         shipping_country_code_lock: 'US',
-//         language_code: 'en',
-//         cart_url: 'https://commercelayer.io',
-//         return_url: 'https://commercelayer.io',
-//         privacy_url: 'https://commercelayer.io',
-//         terms_url: 'https://commercelayer.io'
-//       }
-//     }
-//   };
+order = {
+    data: {
+      type: 'orders',
+      attributes: {
+        shipping_country_code_lock: 'US',
+        language_code: 'en',
+        cart_url: 'https://commercelayer.io',
+        return_url: 'https://commercelayer.io',
+        privacy_url: 'https://commercelayer.io',
+        terms_url: 'https://commercelayer.io'
+      }
+    }
+  };
 
 test.execute(commercelayer.createOrder(order));
