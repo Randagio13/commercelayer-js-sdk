@@ -7,17 +7,17 @@ commercelayer.settings.raw_response = false;
 
 commercelayer.initialize(test.config);
 
-test.separator('listSkus()');
+// test.separator('listSkus()');
 
 // api/skus?filter[codes]=' + skuCodes.join(',') +'&include=prices&page[size]=25
 
-let qf = new commercelayer.query.QueryFilter()
-    .filter('codes', ['TSHIRTMM000000E63E74MXXX',
-    'TSHIRTMM000000E63E74LXXX',
-    'TSHIRTMM000000E63E74XLXX',
-    'TSHIRTMM000000FFFFFFMXXX'])
-    .include('prices')
-    .page(null, 25);
+// let qf = new commercelayer.query.QueryFilter()
+//     .filter('codes', ['TSHIRTMM000000E63E74MXXX',
+//     'TSHIRTMM000000E63E74LXXX',
+//     'TSHIRTMM000000E63E74XLXX',
+//     'TSHIRTMM000000FFFFFFMXXX'])
+//     .include('prices')
+//     .page(null, 25);
 
 // test.execute(commercelayer.listSkus(qf))
 // .then(response => {
@@ -30,7 +30,11 @@ let qf = new commercelayer.query.QueryFilter()
 
 
 
-commercelayer.listSkus(qf).then(response => { console.log('1111111111'+response.get('code')) }).catch(err => console.log(err));
-commercelayer.listSkus(qf).then(response => { console.log('2222222222'+response.get('code')) }).catch(err => console.log(err));
-commercelayer.listSkus(qf).then(response => { console.log('3333333333'+response.get('code')) }).catch(err => console.log(err));
-commercelayer.listSkus(qf).then(response => { console.log('4444444444'+response.get('code')) }).catch(err => console.log(err));
+// commercelayer.listSkus(qf).then(response => { console.log('1111111111'+response.get('code')) }).catch(err => console.log(err));
+// commercelayer.listSkus(qf).then(response => { console.log('2222222222'+response.get('code')) }).catch(err => console.log(err));
+// commercelayer.listSkus(qf).then(response => { console.log('3333333333'+response.get('code')) }).catch(err => console.log(err));
+// commercelayer.listSkus(qf).then(response => { console.log('4444444444'+response.get('code')) }).catch(err => console.log(err));
+
+
+test.separator('allSkus()');
+test.execute(commercelayer.allSkus());
