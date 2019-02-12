@@ -13,18 +13,18 @@ commercelayer.initialize(test.config);
 // test.execute(commercelayer.retrieveOrder(9839));
 
 
-// test.separator('crerateOrder()');
-// let order = new commercelayer.model.Order();
-// order.cart_url = 'https://commercelayer.io';
-// order.return_url = 'https://commercelayer.io';
-// order.privacy_url = 'https://commercelayer.io';
-// order.terms_url = 'https://commercelayer.io';
+test.separator('crerateOrder()');
+let order = new commercelayer.model.Order();
+order.cart_url = 'https://commercelayer.io';
+order.return_url = 'https://commercelayer.io';
+order.privacy_url = 'https://commercelayer.io';
+order.terms_url = 'https://commercelayer.io';
 
-// let address = new commercelayer.model.Address(100);
-// order.shipping_address = address;
+let address = new commercelayer.model.Address(100);
+order.shipping_address = address;
 
-// let market = new commercelayer.model.Market(200);
-// order.market = market;
+let market = new commercelayer.model.Market(200);
+order.market = market;
 
 // order = {
 //     data: {
@@ -40,8 +40,8 @@ commercelayer.initialize(test.config);
 //     }
 //   };
 
-// test.execute(commercelayer.createOrder(order));
+test.execute(commercelayer.createOrder(order));
 
 
-test.separator('allOrders()');
-test.execute(commercelayer.allOrders());
+// test.separator('allOrders()');
+// test.execute(commercelayer.allOrders());

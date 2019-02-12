@@ -7,7 +7,7 @@ commercelayer.settings.raw_response = false;
 
 commercelayer.initialize(test.config);
 
-// test.separator('listSkus()');
+test.separator('listSkus()');
 
 // api/skus?filter[codes]=' + skuCodes.join(',') +'&include=prices&page[size]=25
 
@@ -19,7 +19,7 @@ commercelayer.initialize(test.config);
 //     .include('prices')
 //     .page(null, 25);
 
-// test.execute(commercelayer.listSkus(qf))
+test.execute(commercelayer.listSkus())
 // .then(response => {
 //     if (!commercelayer.settings.raw_response) console.log(response.get('code'))
 // });
@@ -36,5 +36,5 @@ commercelayer.initialize(test.config);
 // commercelayer.listSkus(qf).then(response => { console.log('4444444444'+response.get('code')) }).catch(err => console.log(err));
 
 
-test.separator('allSkus()');
-test.execute(commercelayer.allSkus());
+// test.separator('allSkus()');
+// test.execute(commercelayer.allSkus());
