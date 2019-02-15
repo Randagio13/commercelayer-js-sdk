@@ -5,7 +5,7 @@ const test = require('./test')
 
 commercelayer.initialize(test.config);
 
-commercelayer.settings.response_type = 'normalized';
+commercelayer.settings.response_type = 'jsonapi';
 
 let qf = new commercelayer.query.QueryFilter();
 qf.include('market', 'customer', 'line_items');
@@ -15,9 +15,7 @@ qf.include('market', 'customer', 'line_items');
 
 
 test.separator('retrieveOrder()');
-commercelayer.retrieveOrder(9839, qf).then((x) => {
-    test.inspect(x);
-});
+test.execute(commercelayer.retrieveOrder(9839, qf));
 
 
 

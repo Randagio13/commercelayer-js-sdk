@@ -4,10 +4,10 @@ const commercelayer = require('../index')
 
 commercelayer.settings.debug = true;
 commercelayer.settings.console = true;
-commercelayer.settings.trace = false;
+commercelayer.settings.trace = true;
 
 const log_enabled = commercelayer.settings.debug && commercelayer.settings.console;
-const inspect_enabled = commercelayer.settings.trace;
+const inspect_enabled = true;
 
 const cfg = {
     client_id: '351020e9c84f2076755083f08bfe8e47365a76395db1059c3219c37abff86534',
