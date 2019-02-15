@@ -4,7 +4,7 @@ const commercelayer = require('../index')
 
 commercelayer.settings.debug = true;
 commercelayer.settings.console = true;
-commercelayer.settings.trace = true;
+commercelayer.settings.trace = false;
 
 const log_enabled = commercelayer.settings.debug && commercelayer.settings.console;
 const inspect_enabled = commercelayer.settings.trace;
@@ -30,4 +30,8 @@ module.exports.execute = (promise, log = log_enabled, inspect = inspect_enabled)
         .catch((error) => { if (log) console.log('ERROR: '); return error; })
         .then((output) => { if (log) console.log(inspect? util.inspect(output, false, null, true /* enable colors */) : output); return output; })
         .finally(() => { console.log('end of api test call.'); console.log(); });
+}
+
+module.exports.inspect = (obj) => {
+    console.log(util.inspect(obj, false, null, true));
 }
