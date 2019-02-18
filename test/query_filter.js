@@ -1,5 +1,5 @@
 
-const query = require('../lib/query')
+const query = require('../index').query
 
 
 let qf = new query.QueryFilter()
