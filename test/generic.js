@@ -2,6 +2,8 @@ const commercelayer = require('../index')
 const test = require('./test')
 const jsonapi = require('../lib/jsonapi')
 const utils = require('../lib/utils')
+const model = require('../lib/model')
+const log = require('../lib/log')
 
 order = {
   data:
@@ -450,9 +452,16 @@ order = {
 };
 
 
-let res = jsonapi.deserialize(order);
+// let res = jsonapi.deserialize(order);
 
-console.log('DESERIALIZED')
-test.inspect(res)
-console.log('SERIALIZED')
-test.inspect(jsonapi.serialize(res))
+// console.log('DESERIALIZED')
+// test.inspect(res)
+// console.log('SERIALIZED')
+// test.inspect(jsonapi.serialize(res))
+
+let o = model.helper.newResource('orders', 100, {guest:'pippo', customer_email:'pippo@server.com'});
+log.msg(o)
+
+log.msg(model.helper.isApiResource(o))
+
+console.log(log.enabled)
