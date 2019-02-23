@@ -1,4 +1,4 @@
 
 module.exports = {
-    Orders : [ 'retrieve', 'create', 'list' ]
+    Orders : [ 'retrieve', 'create', 'list', 'update' ]
 }
