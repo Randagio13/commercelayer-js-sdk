@@ -13,7 +13,7 @@ describe("Orders", function() {
   
 
     // Orders.create
-    if (permissions.Orders.includes('create'))
+    if (permissions.Orders && permissions.Orders.includes('create'))
         it("create", function() {
             return commercelayer.createOrder(new commercelayer.model.Order())
                 .then(response => {
@@ -24,7 +24,7 @@ describe("Orders", function() {
 
 
     // Orders.retrieve
-    if (permissions.Orders.includes('retrieve'))
+    if (permissions.Orders && permissions.Orders.includes('retrieve'))
         it("retrieve", function() {
             return commercelayer.retrieveOrder(data.Orders.retrieve.id)
                 .then(response => {
@@ -35,7 +35,7 @@ describe("Orders", function() {
 
 
     // Orders.udate
-    if (permissions.Orders.includes('update'))
+    if (permissions.Orders && permissions.Orders.includes('update'))
         it("update", function() {
             return commercelayer.updateOrder(data.Orders.update.id, new commercelayer.model.Order().setFields(data.Orders.update.fields))
                 .then(response => {
@@ -48,7 +48,7 @@ describe("Orders", function() {
 
 
     // Orders.list
-    if (permissions.Orders.includes('list'))
+    if (permissions.Orders && permissions.Orders.includes('list'))
         it("list", function() {
             return commercelayer.listOrders()
                 .then(response => {
