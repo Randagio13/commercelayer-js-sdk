@@ -1,4 +1,4 @@
-// File automatically generated at 26/02/2019 09:22:29 by commercelayer-js-sdk-codegen
+// File automatically generated at 26/02/2019 18:21:08 by commercelayer-js-sdk-codegen
 
 
 const commercelayer = require('../index')
@@ -46,7 +46,7 @@ describe("StockLocations", function() {
 	        return commercelayer.updateStockLocation(data.StockLocations.update.id, new commercelayer.model.StockLocation().setFields(data.StockLocations.update.fields))
 	            .then(response => {
 	                Object.keys(data.StockLocations.update.fields).forEach(field => {
-	                    expect(response.get(field).toBe(data.StockLocations.update.fields[field]))
+	                    expect(response.get(field)).toBe(data.StockLocations.update.fields[field])
 	                })
 	            })
 	    });

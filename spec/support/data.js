@@ -1,3 +1,4 @@
+const model = require('../../lib/model')
 
 const Orders = {
     retrieve : {
@@ -6,8 +7,10 @@ const Orders = {
     update : {
         id : '9839',
         fields : {
-            guest : 'pippo',
-            customer_email : 'pippo@server.com'
+            id : '9839',
+            guest : false,
+            customer_email : 'pippo@server.com',
+            market : new model.Market(185)
         }
     }
 }

@@ -1,4 +1,4 @@
-// File automatically generated at 26/02/2019 09:22:29 by commercelayer-js-sdk-codegen
+// File automatically generated at 26/02/2019 18:21:08 by commercelayer-js-sdk-codegen
 
 
 const commercelayer = require('../index')
@@ -46,7 +46,7 @@ describe("CustomerPaymentSources", function() {
 	        return commercelayer.updateCustomerPaymentSource(data.CustomerPaymentSources.update.id, new commercelayer.model.CustomerPaymentSource().setFields(data.CustomerPaymentSources.update.fields))
 	            .then(response => {
 	                Object.keys(data.CustomerPaymentSources.update.fields).forEach(field => {
-	                    expect(response.get(field).toBe(data.CustomerPaymentSources.update.fields[field]))
+	                    expect(response.get(field)).toBe(data.CustomerPaymentSources.update.fields[field])
 	                })
 	            })
 	    });
