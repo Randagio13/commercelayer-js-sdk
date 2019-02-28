@@ -7,15 +7,15 @@ commercelayer.initialize(test.config);
 
 commercelayer.settings.response_type = 'model';
 
-let qf = new commercelayer.query.QueryFilter();
-qf.include('market', 'customer', 'line_items');
+// let qf = new commercelayer.query.QueryFilter();
+// qf.include('market', 'customer', 'line_items');
 
-// test.separator('listOrders()');
-// test.execute(commercelayer.listOrders());
+test.separator('listOrders()');
+test.execute(commercelayer.listOrders());
 
 
-test.separator('retrieveOrder()');
-test.execute(commercelayer.retrieveOrder(9833, qf));
+// test.separator('retrieveOrder()');
+// test.execute(commercelayer.retrieveOrder(9833, qf));
 
 // test.separator('updateOrder()');
 // test.execute(commercelayer.updateOrder(9839, new commercelayer.model.Order()));
