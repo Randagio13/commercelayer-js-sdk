@@ -5,7 +5,7 @@ const test = require('./test')
 
 commercelayer.initialize(test.config);
 
-commercelayer.settings.response_type = 'jsonapi';
+commercelayer.settings.response_type = 'model';
 
 let qf = new commercelayer.query.QueryFilter();
 qf.include('market', 'customer', 'line_items');
