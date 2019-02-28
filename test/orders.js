@@ -14,11 +14,11 @@ qf.include('market', 'customer', 'line_items');
 // test.execute(commercelayer.listOrders());
 
 
-// test.separator('retrieveOrder()');
-// test.execute(commercelayer.retrieveOrder(9839, qf));
+test.separator('retrieveOrder()');
+test.execute(commercelayer.retrieveOrder(9833, qf));
 
-test.separator('updateOrder()');
-test.execute(commercelayer.updateOrder(9839, new commercelayer.model.Order()));
+// test.separator('updateOrder()');
+// test.execute(commercelayer.updateOrder(9839, new commercelayer.model.Order()));
 
 
 
