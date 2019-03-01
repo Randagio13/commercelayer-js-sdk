@@ -1,4 +1,4 @@
-// File automatically generated at 26/02/2019 18:21:08 by commercelayer-js-sdk-codegen
+// File automatically generated at 01/03/2019 16:03:42 by commercelayer-js-sdk-codegen
 
 
 const commercelayer = require('../index')
@@ -17,18 +17,20 @@ describe("CustomerPasswordResets", function() {
 
 	// CustomerPasswordResets.create
 	if (permissions.CustomerPasswordResets && permissions.CustomerPasswordResets.includes('create'))
+	if (data.CustomerPasswordResets && data.CustomerPasswordResets.create)
 	    it("create", function() {
-	        return commercelayer.createCustomerPasswordReset(new commercelayer.model.CustomerPasswordReset())
+	        return commercelayer.createCustomerPasswordReset(new commercelayer.model.CustomerPasswordReset().setFields(data.CustomerPasswordResets.create))
 	            .then(response => {
 	                expect(response.get('id')).not.toBeNull();                
 	            })
 	    });
+	else console.log('Test CustomerPasswordResets.create skipped: missing required test data')
 	else console.log('Test CustomerPasswordResets.create skipped: missing required resource permission')
 
 
 	// CustomerPasswordResets.retrieve
 	if (permissions.CustomerPasswordResets && permissions.CustomerPasswordResets.includes('retrieve'))
-	if (data.CustomerPasswordResets && data.CustomerPasswordResets.update)
+	if (data.CustomerPasswordResets && data.CustomerPasswordResets.retrieve)
 	    it("retrieve", function() {
 	        return commercelayer.retrieveCustomerPasswordReset(data.CustomerPasswordResets.retrieve.id)
 	            .then(response => {
@@ -43,10 +45,13 @@ describe("CustomerPasswordResets", function() {
 	if (permissions.CustomerPasswordResets && permissions.CustomerPasswordResets.includes('update'))
 	if (data.CustomerPasswordResets && data.CustomerPasswordResets.update)
 	    it("update", function() {
-	        return commercelayer.updateCustomerPasswordReset(data.CustomerPasswordResets.update.id, new commercelayer.model.CustomerPasswordReset().setFields(data.CustomerPasswordResets.update.fields))
+	        return commercelayer.updateCustomerPasswordReset(data.CustomerPasswordResets.update.id, new commercelayer.model.CustomerPasswordReset().setFields(data.CustomerPasswordResets.update))
 	            .then(response => {
-	                Object.keys(data.CustomerPasswordResets.update.fields).forEach(field => {
-	                    expect(response.get(field)).toBe(data.CustomerPasswordResets.update.fields[field])
+	                Object.keys(data.CustomerPasswordResets.update).forEach(field => {
+	                	if (commercelayer.model.helper.isApiResource(data.CustomerPasswordResets.update[field])) {
+							console.log('Evaluation of resource object not supported ['  + field + ']')
+						}
+	                    else expect(response.get(field)).toBe(data.CustomerPasswordResets.update[field])
 	                })
 	            })
 	    });

@@ -1,4 +1,4 @@
-// File automatically generated at 26/02/2019 18:21:08 by commercelayer-js-sdk-codegen
+// File automatically generated at 01/03/2019 16:03:42 by commercelayer-js-sdk-codegen
 
 
 const commercelayer = require('../index')
@@ -17,18 +17,20 @@ describe("Parcels", function() {
 
 	// Parcels.create
 	if (permissions.Parcels && permissions.Parcels.includes('create'))
+	if (data.Parcels && data.Parcels.create)
 	    it("create", function() {
-	        return commercelayer.createParcel(new commercelayer.model.Parcel())
+	        return commercelayer.createParcel(new commercelayer.model.Parcel().setFields(data.Parcels.create))
 	            .then(response => {
 	                expect(response.get('id')).not.toBeNull();                
 	            })
 	    });
+	else console.log('Test Parcels.create skipped: missing required test data')
 	else console.log('Test Parcels.create skipped: missing required resource permission')
 
 
 	// Parcels.retrieve
 	if (permissions.Parcels && permissions.Parcels.includes('retrieve'))
-	if (data.Parcels && data.Parcels.update)
+	if (data.Parcels && data.Parcels.retrieve)
 	    it("retrieve", function() {
 	        return commercelayer.retrieveParcel(data.Parcels.retrieve.id)
 	            .then(response => {
@@ -43,10 +45,13 @@ describe("Parcels", function() {
 	if (permissions.Parcels && permissions.Parcels.includes('update'))
 	if (data.Parcels && data.Parcels.update)
 	    it("update", function() {
-	        return commercelayer.updateParcel(data.Parcels.update.id, new commercelayer.model.Parcel().setFields(data.Parcels.update.fields))
+	        return commercelayer.updateParcel(data.Parcels.update.id, new commercelayer.model.Parcel().setFields(data.Parcels.update))
 	            .then(response => {
-	                Object.keys(data.Parcels.update.fields).forEach(field => {
-	                    expect(response.get(field)).toBe(data.Parcels.update.fields[field])
+	                Object.keys(data.Parcels.update).forEach(field => {
+	                	if (commercelayer.model.helper.isApiResource(data.Parcels.update[field])) {
+							console.log('Evaluation of resource object not supported ['  + field + ']')
+						}
+	                    else expect(response.get(field)).toBe(data.Parcels.update[field])
 	                })
 	            })
 	    });

@@ -1,4 +1,4 @@
-// File automatically generated at 26/02/2019 18:21:08 by commercelayer-js-sdk-codegen
+// File automatically generated at 01/03/2019 16:03:42 by commercelayer-js-sdk-codegen
 
 
 const commercelayer = require('../index')
@@ -17,18 +17,20 @@ describe("ShippingZones", function() {
 
 	// ShippingZones.create
 	if (permissions.ShippingZones && permissions.ShippingZones.includes('create'))
+	if (data.ShippingZones && data.ShippingZones.create)
 	    it("create", function() {
-	        return commercelayer.createShippingZone(new commercelayer.model.ShippingZone())
+	        return commercelayer.createShippingZone(new commercelayer.model.ShippingZone().setFields(data.ShippingZones.create))
 	            .then(response => {
 	                expect(response.get('id')).not.toBeNull();                
 	            })
 	    });
+	else console.log('Test ShippingZones.create skipped: missing required test data')
 	else console.log('Test ShippingZones.create skipped: missing required resource permission')
 
 
 	// ShippingZones.retrieve
 	if (permissions.ShippingZones && permissions.ShippingZones.includes('retrieve'))
-	if (data.ShippingZones && data.ShippingZones.update)
+	if (data.ShippingZones && data.ShippingZones.retrieve)
 	    it("retrieve", function() {
 	        return commercelayer.retrieveShippingZone(data.ShippingZones.retrieve.id)
 	            .then(response => {
@@ -43,10 +45,13 @@ describe("ShippingZones", function() {
 	if (permissions.ShippingZones && permissions.ShippingZones.includes('update'))
 	if (data.ShippingZones && data.ShippingZones.update)
 	    it("update", function() {
-	        return commercelayer.updateShippingZone(data.ShippingZones.update.id, new commercelayer.model.ShippingZone().setFields(data.ShippingZones.update.fields))
+	        return commercelayer.updateShippingZone(data.ShippingZones.update.id, new commercelayer.model.ShippingZone().setFields(data.ShippingZones.update))
 	            .then(response => {
-	                Object.keys(data.ShippingZones.update.fields).forEach(field => {
-	                    expect(response.get(field)).toBe(data.ShippingZones.update.fields[field])
+	                Object.keys(data.ShippingZones.update).forEach(field => {
+	                	if (commercelayer.model.helper.isApiResource(data.ShippingZones.update[field])) {
+							console.log('Evaluation of resource object not supported ['  + field + ']')
+						}
+	                    else expect(response.get(field)).toBe(data.ShippingZones.update[field])
 	                })
 	            })
 	    });

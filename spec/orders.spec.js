@@ -1,4 +1,4 @@
-// File automatically generated at 26/02/2019 18:21:08 by commercelayer-js-sdk-codegen
+// File automatically generated at 01/03/2019 16:03:42 by commercelayer-js-sdk-codegen
 
 
 const commercelayer = require('../index')
@@ -17,18 +17,20 @@ describe("Orders", function() {
 
 	// Orders.create
 	if (permissions.Orders && permissions.Orders.includes('create'))
+	if (data.Orders && data.Orders.create)
 	    it("create", function() {
-	        return commercelayer.createOrder(new commercelayer.model.Order())
+	        return commercelayer.createOrder(new commercelayer.model.Order().setFields(data.Orders.create))
 	            .then(response => {
 	                expect(response.get('id')).not.toBeNull();                
 	            })
 	    });
+	else console.log('Test Orders.create skipped: missing required test data')
 	else console.log('Test Orders.create skipped: missing required resource permission')
 
 
 	// Orders.retrieve
 	if (permissions.Orders && permissions.Orders.includes('retrieve'))
-	if (data.Orders && data.Orders.update)
+	if (data.Orders && data.Orders.retrieve)
 	    it("retrieve", function() {
 	        return commercelayer.retrieveOrder(data.Orders.retrieve.id)
 	            .then(response => {
@@ -43,10 +45,13 @@ describe("Orders", function() {
 	if (permissions.Orders && permissions.Orders.includes('update'))
 	if (data.Orders && data.Orders.update)
 	    it("update", function() {
-	        return commercelayer.updateOrder(data.Orders.update.id, new commercelayer.model.Order().setFields(data.Orders.update.fields))
+	        return commercelayer.updateOrder(data.Orders.update.id, new commercelayer.model.Order().setFields(data.Orders.update))
 	            .then(response => {
-	                Object.keys(data.Orders.update.fields).forEach(field => {
-	                    expect(response.get(field)).toBe(data.Orders.update.fields[field])
+	                Object.keys(data.Orders.update).forEach(field => {
+	                	if (commercelayer.model.helper.isApiResource(data.Orders.update[field])) {
+							console.log('Evaluation of resource object not supported ['  + field + ']')
+						}
+	                    else expect(response.get(field)).toBe(data.Orders.update[field])
 	                })
 	            })
 	    });

@@ -1,4 +1,4 @@
-// File automatically generated at 26/02/2019 18:21:08 by commercelayer-js-sdk-codegen
+// File automatically generated at 01/03/2019 16:03:42 by commercelayer-js-sdk-codegen
 
 
 const commercelayer = require('../index')
@@ -17,18 +17,20 @@ describe("CustomerSubscriptions", function() {
 
 	// CustomerSubscriptions.create
 	if (permissions.CustomerSubscriptions && permissions.CustomerSubscriptions.includes('create'))
+	if (data.CustomerSubscriptions && data.CustomerSubscriptions.create)
 	    it("create", function() {
-	        return commercelayer.createCustomerSubscription(new commercelayer.model.CustomerSubscription())
+	        return commercelayer.createCustomerSubscription(new commercelayer.model.CustomerSubscription().setFields(data.CustomerSubscriptions.create))
 	            .then(response => {
 	                expect(response.get('id')).not.toBeNull();                
 	            })
 	    });
+	else console.log('Test CustomerSubscriptions.create skipped: missing required test data')
 	else console.log('Test CustomerSubscriptions.create skipped: missing required resource permission')
 
 
 	// CustomerSubscriptions.retrieve
 	if (permissions.CustomerSubscriptions && permissions.CustomerSubscriptions.includes('retrieve'))
-	if (data.CustomerSubscriptions && data.CustomerSubscriptions.update)
+	if (data.CustomerSubscriptions && data.CustomerSubscriptions.retrieve)
 	    it("retrieve", function() {
 	        return commercelayer.retrieveCustomerSubscription(data.CustomerSubscriptions.retrieve.id)
 	            .then(response => {
@@ -43,10 +45,13 @@ describe("CustomerSubscriptions", function() {
 	if (permissions.CustomerSubscriptions && permissions.CustomerSubscriptions.includes('update'))
 	if (data.CustomerSubscriptions && data.CustomerSubscriptions.update)
 	    it("update", function() {
-	        return commercelayer.updateCustomerSubscription(data.CustomerSubscriptions.update.id, new commercelayer.model.CustomerSubscription().setFields(data.CustomerSubscriptions.update.fields))
+	        return commercelayer.updateCustomerSubscription(data.CustomerSubscriptions.update.id, new commercelayer.model.CustomerSubscription().setFields(data.CustomerSubscriptions.update))
 	            .then(response => {
-	                Object.keys(data.CustomerSubscriptions.update.fields).forEach(field => {
-	                    expect(response.get(field)).toBe(data.CustomerSubscriptions.update.fields[field])
+	                Object.keys(data.CustomerSubscriptions.update).forEach(field => {
+	                	if (commercelayer.model.helper.isApiResource(data.CustomerSubscriptions.update[field])) {
+							console.log('Evaluation of resource object not supported ['  + field + ']')
+						}
+	                    else expect(response.get(field)).toBe(data.CustomerSubscriptions.update[field])
 	                })
 	            })
 	    });

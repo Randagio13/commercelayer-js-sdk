@@ -1,4 +1,4 @@
-// File automatically generated at 26/02/2019 18:21:08 by commercelayer-js-sdk-codegen
+// File automatically generated at 01/03/2019 16:03:42 by commercelayer-js-sdk-codegen
 
 
 const commercelayer = require('../index')
@@ -17,18 +17,20 @@ describe("InventoryModels", function() {
 
 	// InventoryModels.create
 	if (permissions.InventoryModels && permissions.InventoryModels.includes('create'))
+	if (data.InventoryModels && data.InventoryModels.create)
 	    it("create", function() {
-	        return commercelayer.createInventoryModel(new commercelayer.model.InventoryModel())
+	        return commercelayer.createInventoryModel(new commercelayer.model.InventoryModel().setFields(data.InventoryModels.create))
 	            .then(response => {
 	                expect(response.get('id')).not.toBeNull();                
 	            })
 	    });
+	else console.log('Test InventoryModels.create skipped: missing required test data')
 	else console.log('Test InventoryModels.create skipped: missing required resource permission')
 
 
 	// InventoryModels.retrieve
 	if (permissions.InventoryModels && permissions.InventoryModels.includes('retrieve'))
-	if (data.InventoryModels && data.InventoryModels.update)
+	if (data.InventoryModels && data.InventoryModels.retrieve)
 	    it("retrieve", function() {
 	        return commercelayer.retrieveInventoryModel(data.InventoryModels.retrieve.id)
 	            .then(response => {
@@ -43,10 +45,13 @@ describe("InventoryModels", function() {
 	if (permissions.InventoryModels && permissions.InventoryModels.includes('update'))
 	if (data.InventoryModels && data.InventoryModels.update)
 	    it("update", function() {
-	        return commercelayer.updateInventoryModel(data.InventoryModels.update.id, new commercelayer.model.InventoryModel().setFields(data.InventoryModels.update.fields))
+	        return commercelayer.updateInventoryModel(data.InventoryModels.update.id, new commercelayer.model.InventoryModel().setFields(data.InventoryModels.update))
 	            .then(response => {
-	                Object.keys(data.InventoryModels.update.fields).forEach(field => {
-	                    expect(response.get(field)).toBe(data.InventoryModels.update.fields[field])
+	                Object.keys(data.InventoryModels.update).forEach(field => {
+	                	if (commercelayer.model.helper.isApiResource(data.InventoryModels.update[field])) {
+							console.log('Evaluation of resource object not supported ['  + field + ']')
+						}
+	                    else expect(response.get(field)).toBe(data.InventoryModels.update[field])
 	                })
 	            })
 	    });

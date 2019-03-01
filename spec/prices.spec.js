@@ -1,4 +1,4 @@
-// File automatically generated at 26/02/2019 18:21:08 by commercelayer-js-sdk-codegen
+// File automatically generated at 01/03/2019 16:03:42 by commercelayer-js-sdk-codegen
 
 
 const commercelayer = require('../index')
@@ -17,18 +17,20 @@ describe("Prices", function() {
 
 	// Prices.create
 	if (permissions.Prices && permissions.Prices.includes('create'))
+	if (data.Prices && data.Prices.create)
 	    it("create", function() {
-	        return commercelayer.createPrice(new commercelayer.model.Price())
+	        return commercelayer.createPrice(new commercelayer.model.Price().setFields(data.Prices.create))
 	            .then(response => {
 	                expect(response.get('id')).not.toBeNull();                
 	            })
 	    });
+	else console.log('Test Prices.create skipped: missing required test data')
 	else console.log('Test Prices.create skipped: missing required resource permission')
 
 
 	// Prices.retrieve
 	if (permissions.Prices && permissions.Prices.includes('retrieve'))
-	if (data.Prices && data.Prices.update)
+	if (data.Prices && data.Prices.retrieve)
 	    it("retrieve", function() {
 	        return commercelayer.retrievePrice(data.Prices.retrieve.id)
 	            .then(response => {
@@ -43,10 +45,13 @@ describe("Prices", function() {
 	if (permissions.Prices && permissions.Prices.includes('update'))
 	if (data.Prices && data.Prices.update)
 	    it("update", function() {
-	        return commercelayer.updatePrice(data.Prices.update.id, new commercelayer.model.Price().setFields(data.Prices.update.fields))
+	        return commercelayer.updatePrice(data.Prices.update.id, new commercelayer.model.Price().setFields(data.Prices.update))
 	            .then(response => {
-	                Object.keys(data.Prices.update.fields).forEach(field => {
-	                    expect(response.get(field)).toBe(data.Prices.update.fields[field])
+	                Object.keys(data.Prices.update).forEach(field => {
+	                	if (commercelayer.model.helper.isApiResource(data.Prices.update[field])) {
+							console.log('Evaluation of resource object not supported ['  + field + ']')
+						}
+	                    else expect(response.get(field)).toBe(data.Prices.update[field])
 	                })
 	            })
 	    });

@@ -1,4 +1,4 @@
-// File automatically generated at 26/02/2019 18:21:08 by commercelayer-js-sdk-codegen
+// File automatically generated at 01/03/2019 16:03:42 by commercelayer-js-sdk-codegen
 
 
 const commercelayer = require('../index')
@@ -17,18 +17,20 @@ describe("Webhooks", function() {
 
 	// Webhooks.create
 	if (permissions.Webhooks && permissions.Webhooks.includes('create'))
+	if (data.Webhooks && data.Webhooks.create)
 	    it("create", function() {
-	        return commercelayer.createWebhook(new commercelayer.model.Webhook())
+	        return commercelayer.createWebhook(new commercelayer.model.Webhook().setFields(data.Webhooks.create))
 	            .then(response => {
 	                expect(response.get('id')).not.toBeNull();                
 	            })
 	    });
+	else console.log('Test Webhooks.create skipped: missing required test data')
 	else console.log('Test Webhooks.create skipped: missing required resource permission')
 
 
 	// Webhooks.retrieve
 	if (permissions.Webhooks && permissions.Webhooks.includes('retrieve'))
-	if (data.Webhooks && data.Webhooks.update)
+	if (data.Webhooks && data.Webhooks.retrieve)
 	    it("retrieve", function() {
 	        return commercelayer.retrieveWebhook(data.Webhooks.retrieve.id)
 	            .then(response => {
@@ -43,10 +45,13 @@ describe("Webhooks", function() {
 	if (permissions.Webhooks && permissions.Webhooks.includes('update'))
 	if (data.Webhooks && data.Webhooks.update)
 	    it("update", function() {
-	        return commercelayer.updateWebhook(data.Webhooks.update.id, new commercelayer.model.Webhook().setFields(data.Webhooks.update.fields))
+	        return commercelayer.updateWebhook(data.Webhooks.update.id, new commercelayer.model.Webhook().setFields(data.Webhooks.update))
 	            .then(response => {
-	                Object.keys(data.Webhooks.update.fields).forEach(field => {
-	                    expect(response.get(field)).toBe(data.Webhooks.update.fields[field])
+	                Object.keys(data.Webhooks.update).forEach(field => {
+	                	if (commercelayer.model.helper.isApiResource(data.Webhooks.update[field])) {
+							console.log('Evaluation of resource object not supported ['  + field + ']')
+						}
+	                    else expect(response.get(field)).toBe(data.Webhooks.update[field])
 	                })
 	            })
 	    });

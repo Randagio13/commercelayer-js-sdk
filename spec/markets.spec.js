@@ -1,4 +1,4 @@
-// File automatically generated at 26/02/2019 18:21:08 by commercelayer-js-sdk-codegen
+// File automatically generated at 01/03/2019 16:03:42 by commercelayer-js-sdk-codegen
 
 
 const commercelayer = require('../index')
@@ -17,18 +17,20 @@ describe("Markets", function() {
 
 	// Markets.create
 	if (permissions.Markets && permissions.Markets.includes('create'))
+	if (data.Markets && data.Markets.create)
 	    it("create", function() {
-	        return commercelayer.createMarket(new commercelayer.model.Market())
+	        return commercelayer.createMarket(new commercelayer.model.Market().setFields(data.Markets.create))
 	            .then(response => {
 	                expect(response.get('id')).not.toBeNull();                
 	            })
 	    });
+	else console.log('Test Markets.create skipped: missing required test data')
 	else console.log('Test Markets.create skipped: missing required resource permission')
 
 
 	// Markets.retrieve
 	if (permissions.Markets && permissions.Markets.includes('retrieve'))
-	if (data.Markets && data.Markets.update)
+	if (data.Markets && data.Markets.retrieve)
 	    it("retrieve", function() {
 	        return commercelayer.retrieveMarket(data.Markets.retrieve.id)
 	            .then(response => {
@@ -43,10 +45,13 @@ describe("Markets", function() {
 	if (permissions.Markets && permissions.Markets.includes('update'))
 	if (data.Markets && data.Markets.update)
 	    it("update", function() {
-	        return commercelayer.updateMarket(data.Markets.update.id, new commercelayer.model.Market().setFields(data.Markets.update.fields))
+	        return commercelayer.updateMarket(data.Markets.update.id, new commercelayer.model.Market().setFields(data.Markets.update))
 	            .then(response => {
-	                Object.keys(data.Markets.update.fields).forEach(field => {
-	                    expect(response.get(field)).toBe(data.Markets.update.fields[field])
+	                Object.keys(data.Markets.update).forEach(field => {
+	                	if (commercelayer.model.helper.isApiResource(data.Markets.update[field])) {
+							console.log('Evaluation of resource object not supported ['  + field + ']')
+						}
+	                    else expect(response.get(field)).toBe(data.Markets.update[field])
 	                })
 	            })
 	    });

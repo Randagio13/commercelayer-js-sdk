@@ -1,4 +1,4 @@
-// File automatically generated at 26/02/2019 18:21:08 by commercelayer-js-sdk-codegen
+// File automatically generated at 01/03/2019 16:03:42 by commercelayer-js-sdk-codegen
 
 
 const commercelayer = require('../index')
@@ -17,18 +17,20 @@ describe("CustomerPaymentSources", function() {
 
 	// CustomerPaymentSources.create
 	if (permissions.CustomerPaymentSources && permissions.CustomerPaymentSources.includes('create'))
+	if (data.CustomerPaymentSources && data.CustomerPaymentSources.create)
 	    it("create", function() {
-	        return commercelayer.createCustomerPaymentSource(new commercelayer.model.CustomerPaymentSource())
+	        return commercelayer.createCustomerPaymentSource(new commercelayer.model.CustomerPaymentSource().setFields(data.CustomerPaymentSources.create))
 	            .then(response => {
 	                expect(response.get('id')).not.toBeNull();                
 	            })
 	    });
+	else console.log('Test CustomerPaymentSources.create skipped: missing required test data')
 	else console.log('Test CustomerPaymentSources.create skipped: missing required resource permission')
 
 
 	// CustomerPaymentSources.retrieve
 	if (permissions.CustomerPaymentSources && permissions.CustomerPaymentSources.includes('retrieve'))
-	if (data.CustomerPaymentSources && data.CustomerPaymentSources.update)
+	if (data.CustomerPaymentSources && data.CustomerPaymentSources.retrieve)
 	    it("retrieve", function() {
 	        return commercelayer.retrieveCustomerPaymentSource(data.CustomerPaymentSources.retrieve.id)
 	            .then(response => {
@@ -43,10 +45,13 @@ describe("CustomerPaymentSources", function() {
 	if (permissions.CustomerPaymentSources && permissions.CustomerPaymentSources.includes('update'))
 	if (data.CustomerPaymentSources && data.CustomerPaymentSources.update)
 	    it("update", function() {
-	        return commercelayer.updateCustomerPaymentSource(data.CustomerPaymentSources.update.id, new commercelayer.model.CustomerPaymentSource().setFields(data.CustomerPaymentSources.update.fields))
+	        return commercelayer.updateCustomerPaymentSource(data.CustomerPaymentSources.update.id, new commercelayer.model.CustomerPaymentSource().setFields(data.CustomerPaymentSources.update))
 	            .then(response => {
-	                Object.keys(data.CustomerPaymentSources.update.fields).forEach(field => {
-	                    expect(response.get(field)).toBe(data.CustomerPaymentSources.update.fields[field])
+	                Object.keys(data.CustomerPaymentSources.update).forEach(field => {
+	                	if (commercelayer.model.helper.isApiResource(data.CustomerPaymentSources.update[field])) {
+							console.log('Evaluation of resource object not supported ['  + field + ']')
+						}
+	                    else expect(response.get(field)).toBe(data.CustomerPaymentSources.update[field])
 	                })
 	            })
 	    });

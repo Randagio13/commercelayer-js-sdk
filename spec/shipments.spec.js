@@ -1,4 +1,4 @@
-// File automatically generated at 26/02/2019 18:21:08 by commercelayer-js-sdk-codegen
+// File automatically generated at 01/03/2019 16:03:42 by commercelayer-js-sdk-codegen
 
 
 const commercelayer = require('../index')
@@ -17,18 +17,20 @@ describe("Shipments", function() {
 
 	// Shipments.create
 	if (permissions.Shipments && permissions.Shipments.includes('create'))
+	if (data.Shipments && data.Shipments.create)
 	    it("create", function() {
-	        return commercelayer.createShipment(new commercelayer.model.Shipment())
+	        return commercelayer.createShipment(new commercelayer.model.Shipment().setFields(data.Shipments.create))
 	            .then(response => {
 	                expect(response.get('id')).not.toBeNull();                
 	            })
 	    });
+	else console.log('Test Shipments.create skipped: missing required test data')
 	else console.log('Test Shipments.create skipped: missing required resource permission')
 
 
 	// Shipments.retrieve
 	if (permissions.Shipments && permissions.Shipments.includes('retrieve'))
-	if (data.Shipments && data.Shipments.update)
+	if (data.Shipments && data.Shipments.retrieve)
 	    it("retrieve", function() {
 	        return commercelayer.retrieveShipment(data.Shipments.retrieve.id)
 	            .then(response => {
@@ -43,10 +45,13 @@ describe("Shipments", function() {
 	if (permissions.Shipments && permissions.Shipments.includes('update'))
 	if (data.Shipments && data.Shipments.update)
 	    it("update", function() {
-	        return commercelayer.updateShipment(data.Shipments.update.id, new commercelayer.model.Shipment().setFields(data.Shipments.update.fields))
+	        return commercelayer.updateShipment(data.Shipments.update.id, new commercelayer.model.Shipment().setFields(data.Shipments.update))
 	            .then(response => {
-	                Object.keys(data.Shipments.update.fields).forEach(field => {
-	                    expect(response.get(field)).toBe(data.Shipments.update.fields[field])
+	                Object.keys(data.Shipments.update).forEach(field => {
+	                	if (commercelayer.model.helper.isApiResource(data.Shipments.update[field])) {
+							console.log('Evaluation of resource object not supported ['  + field + ']')
+						}
+	                    else expect(response.get(field)).toBe(data.Shipments.update[field])
 	                })
 	            })
 	    });

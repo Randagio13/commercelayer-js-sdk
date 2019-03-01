@@ -1,4 +1,4 @@
-// File automatically generated at 26/02/2019 18:21:08 by commercelayer-js-sdk-codegen
+// File automatically generated at 01/03/2019 16:03:42 by commercelayer-js-sdk-codegen
 
 
 const commercelayer = require('../index')
@@ -17,18 +17,20 @@ describe("ShippingMethods", function() {
 
 	// ShippingMethods.create
 	if (permissions.ShippingMethods && permissions.ShippingMethods.includes('create'))
+	if (data.ShippingMethods && data.ShippingMethods.create)
 	    it("create", function() {
-	        return commercelayer.createShippingMethod(new commercelayer.model.ShippingMethod())
+	        return commercelayer.createShippingMethod(new commercelayer.model.ShippingMethod().setFields(data.ShippingMethods.create))
 	            .then(response => {
 	                expect(response.get('id')).not.toBeNull();                
 	            })
 	    });
+	else console.log('Test ShippingMethods.create skipped: missing required test data')
 	else console.log('Test ShippingMethods.create skipped: missing required resource permission')
 
 
 	// ShippingMethods.retrieve
 	if (permissions.ShippingMethods && permissions.ShippingMethods.includes('retrieve'))
-	if (data.ShippingMethods && data.ShippingMethods.update)
+	if (data.ShippingMethods && data.ShippingMethods.retrieve)
 	    it("retrieve", function() {
 	        return commercelayer.retrieveShippingMethod(data.ShippingMethods.retrieve.id)
 	            .then(response => {
@@ -43,10 +45,13 @@ describe("ShippingMethods", function() {
 	if (permissions.ShippingMethods && permissions.ShippingMethods.includes('update'))
 	if (data.ShippingMethods && data.ShippingMethods.update)
 	    it("update", function() {
-	        return commercelayer.updateShippingMethod(data.ShippingMethods.update.id, new commercelayer.model.ShippingMethod().setFields(data.ShippingMethods.update.fields))
+	        return commercelayer.updateShippingMethod(data.ShippingMethods.update.id, new commercelayer.model.ShippingMethod().setFields(data.ShippingMethods.update))
 	            .then(response => {
-	                Object.keys(data.ShippingMethods.update.fields).forEach(field => {
-	                    expect(response.get(field)).toBe(data.ShippingMethods.update.fields[field])
+	                Object.keys(data.ShippingMethods.update).forEach(field => {
+	                	if (commercelayer.model.helper.isApiResource(data.ShippingMethods.update[field])) {
+							console.log('Evaluation of resource object not supported ['  + field + ']')
+						}
+	                    else expect(response.get(field)).toBe(data.ShippingMethods.update[field])
 	                })
 	            })
 	    });

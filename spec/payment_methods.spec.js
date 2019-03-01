@@ -1,4 +1,4 @@
-// File automatically generated at 26/02/2019 18:21:08 by commercelayer-js-sdk-codegen
+// File automatically generated at 01/03/2019 16:03:42 by commercelayer-js-sdk-codegen
 
 
 const commercelayer = require('../index')
@@ -17,18 +17,20 @@ describe("PaymentMethods", function() {
 
 	// PaymentMethods.create
 	if (permissions.PaymentMethods && permissions.PaymentMethods.includes('create'))
+	if (data.PaymentMethods && data.PaymentMethods.create)
 	    it("create", function() {
-	        return commercelayer.createPaymentMethod(new commercelayer.model.PaymentMethod())
+	        return commercelayer.createPaymentMethod(new commercelayer.model.PaymentMethod().setFields(data.PaymentMethods.create))
 	            .then(response => {
 	                expect(response.get('id')).not.toBeNull();                
 	            })
 	    });
+	else console.log('Test PaymentMethods.create skipped: missing required test data')
 	else console.log('Test PaymentMethods.create skipped: missing required resource permission')
 
 
 	// PaymentMethods.retrieve
 	if (permissions.PaymentMethods && permissions.PaymentMethods.includes('retrieve'))
-	if (data.PaymentMethods && data.PaymentMethods.update)
+	if (data.PaymentMethods && data.PaymentMethods.retrieve)
 	    it("retrieve", function() {
 	        return commercelayer.retrievePaymentMethod(data.PaymentMethods.retrieve.id)
 	            .then(response => {
@@ -43,10 +45,13 @@ describe("PaymentMethods", function() {
 	if (permissions.PaymentMethods && permissions.PaymentMethods.includes('update'))
 	if (data.PaymentMethods && data.PaymentMethods.update)
 	    it("update", function() {
-	        return commercelayer.updatePaymentMethod(data.PaymentMethods.update.id, new commercelayer.model.PaymentMethod().setFields(data.PaymentMethods.update.fields))
+	        return commercelayer.updatePaymentMethod(data.PaymentMethods.update.id, new commercelayer.model.PaymentMethod().setFields(data.PaymentMethods.update))
 	            .then(response => {
-	                Object.keys(data.PaymentMethods.update.fields).forEach(field => {
-	                    expect(response.get(field)).toBe(data.PaymentMethods.update.fields[field])
+	                Object.keys(data.PaymentMethods.update).forEach(field => {
+	                	if (commercelayer.model.helper.isApiResource(data.PaymentMethods.update[field])) {
+							console.log('Evaluation of resource object not supported ['  + field + ']')
+						}
+	                    else expect(response.get(field)).toBe(data.PaymentMethods.update[field])
 	                })
 	            })
 	    });

@@ -1,4 +1,4 @@
-// File automatically generated at 26/02/2019 18:21:08 by commercelayer-js-sdk-codegen
+// File automatically generated at 01/03/2019 16:03:42 by commercelayer-js-sdk-codegen
 
 
 const commercelayer = require('../index')
@@ -17,18 +17,20 @@ describe("ShippingCategories", function() {
 
 	// ShippingCategories.create
 	if (permissions.ShippingCategories && permissions.ShippingCategories.includes('create'))
+	if (data.ShippingCategories && data.ShippingCategories.create)
 	    it("create", function() {
-	        return commercelayer.createShippingCategory(new commercelayer.model.ShippingCategory())
+	        return commercelayer.createShippingCategory(new commercelayer.model.ShippingCategory().setFields(data.ShippingCategories.create))
 	            .then(response => {
 	                expect(response.get('id')).not.toBeNull();                
 	            })
 	    });
+	else console.log('Test ShippingCategories.create skipped: missing required test data')
 	else console.log('Test ShippingCategories.create skipped: missing required resource permission')
 
 
 	// ShippingCategories.retrieve
 	if (permissions.ShippingCategories && permissions.ShippingCategories.includes('retrieve'))
-	if (data.ShippingCategories && data.ShippingCategories.update)
+	if (data.ShippingCategories && data.ShippingCategories.retrieve)
 	    it("retrieve", function() {
 	        return commercelayer.retrieveShippingCategory(data.ShippingCategories.retrieve.id)
 	            .then(response => {
@@ -43,10 +45,13 @@ describe("ShippingCategories", function() {
 	if (permissions.ShippingCategories && permissions.ShippingCategories.includes('update'))
 	if (data.ShippingCategories && data.ShippingCategories.update)
 	    it("update", function() {
-	        return commercelayer.updateShippingCategory(data.ShippingCategories.update.id, new commercelayer.model.ShippingCategory().setFields(data.ShippingCategories.update.fields))
+	        return commercelayer.updateShippingCategory(data.ShippingCategories.update.id, new commercelayer.model.ShippingCategory().setFields(data.ShippingCategories.update))
 	            .then(response => {
-	                Object.keys(data.ShippingCategories.update.fields).forEach(field => {
-	                    expect(response.get(field)).toBe(data.ShippingCategories.update.fields[field])
+	                Object.keys(data.ShippingCategories.update).forEach(field => {
+	                	if (commercelayer.model.helper.isApiResource(data.ShippingCategories.update[field])) {
+							console.log('Evaluation of resource object not supported ['  + field + ']')
+						}
+	                    else expect(response.get(field)).toBe(data.ShippingCategories.update[field])
 	                })
 	            })
 	    });

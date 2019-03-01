@@ -1,4 +1,4 @@
-// File automatically generated at 26/02/2019 18:21:08 by commercelayer-js-sdk-codegen
+// File automatically generated at 01/03/2019 16:03:42 by commercelayer-js-sdk-codegen
 
 
 const commercelayer = require('../index')
@@ -17,18 +17,20 @@ describe("LineItems", function() {
 
 	// LineItems.create
 	if (permissions.LineItems && permissions.LineItems.includes('create'))
+	if (data.LineItems && data.LineItems.create)
 	    it("create", function() {
-	        return commercelayer.createLineItem(new commercelayer.model.LineItem())
+	        return commercelayer.createLineItem(new commercelayer.model.LineItem().setFields(data.LineItems.create))
 	            .then(response => {
 	                expect(response.get('id')).not.toBeNull();                
 	            })
 	    });
+	else console.log('Test LineItems.create skipped: missing required test data')
 	else console.log('Test LineItems.create skipped: missing required resource permission')
 
 
 	// LineItems.retrieve
 	if (permissions.LineItems && permissions.LineItems.includes('retrieve'))
-	if (data.LineItems && data.LineItems.update)
+	if (data.LineItems && data.LineItems.retrieve)
 	    it("retrieve", function() {
 	        return commercelayer.retrieveLineItem(data.LineItems.retrieve.id)
 	            .then(response => {
@@ -43,10 +45,13 @@ describe("LineItems", function() {
 	if (permissions.LineItems && permissions.LineItems.includes('update'))
 	if (data.LineItems && data.LineItems.update)
 	    it("update", function() {
-	        return commercelayer.updateLineItem(data.LineItems.update.id, new commercelayer.model.LineItem().setFields(data.LineItems.update.fields))
+	        return commercelayer.updateLineItem(data.LineItems.update.id, new commercelayer.model.LineItem().setFields(data.LineItems.update))
 	            .then(response => {
-	                Object.keys(data.LineItems.update.fields).forEach(field => {
-	                    expect(response.get(field)).toBe(data.LineItems.update.fields[field])
+	                Object.keys(data.LineItems.update).forEach(field => {
+	                	if (commercelayer.model.helper.isApiResource(data.LineItems.update[field])) {
+							console.log('Evaluation of resource object not supported ['  + field + ']')
+						}
+	                    else expect(response.get(field)).toBe(data.LineItems.update[field])
 	                })
 	            })
 	    });

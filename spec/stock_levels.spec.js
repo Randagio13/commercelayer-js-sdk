@@ -1,4 +1,4 @@
-// File automatically generated at 26/02/2019 18:21:08 by commercelayer-js-sdk-codegen
+// File automatically generated at 01/03/2019 16:03:42 by commercelayer-js-sdk-codegen
 
 
 const commercelayer = require('../index')
@@ -17,18 +17,20 @@ describe("StockLevels", function() {
 
 	// StockLevels.create
 	if (permissions.StockLevels && permissions.StockLevels.includes('create'))
+	if (data.StockLevels && data.StockLevels.create)
 	    it("create", function() {
-	        return commercelayer.createStockLevel(new commercelayer.model.StockLevel())
+	        return commercelayer.createStockLevel(new commercelayer.model.StockLevel().setFields(data.StockLevels.create))
 	            .then(response => {
 	                expect(response.get('id')).not.toBeNull();                
 	            })
 	    });
+	else console.log('Test StockLevels.create skipped: missing required test data')
 	else console.log('Test StockLevels.create skipped: missing required resource permission')
 
 
 	// StockLevels.retrieve
 	if (permissions.StockLevels && permissions.StockLevels.includes('retrieve'))
-	if (data.StockLevels && data.StockLevels.update)
+	if (data.StockLevels && data.StockLevels.retrieve)
 	    it("retrieve", function() {
 	        return commercelayer.retrieveStockLevel(data.StockLevels.retrieve.id)
 	            .then(response => {
@@ -43,10 +45,13 @@ describe("StockLevels", function() {
 	if (permissions.StockLevels && permissions.StockLevels.includes('update'))
 	if (data.StockLevels && data.StockLevels.update)
 	    it("update", function() {
-	        return commercelayer.updateStockLevel(data.StockLevels.update.id, new commercelayer.model.StockLevel().setFields(data.StockLevels.update.fields))
+	        return commercelayer.updateStockLevel(data.StockLevels.update.id, new commercelayer.model.StockLevel().setFields(data.StockLevels.update))
 	            .then(response => {
-	                Object.keys(data.StockLevels.update.fields).forEach(field => {
-	                    expect(response.get(field)).toBe(data.StockLevels.update.fields[field])
+	                Object.keys(data.StockLevels.update).forEach(field => {
+	                	if (commercelayer.model.helper.isApiResource(data.StockLevels.update[field])) {
+							console.log('Evaluation of resource object not supported ['  + field + ']')
+						}
+	                    else expect(response.get(field)).toBe(data.StockLevels.update[field])
 	                })
 	            })
 	    });

@@ -1,4 +1,4 @@
-// File automatically generated at 26/02/2019 18:21:08 by commercelayer-js-sdk-codegen
+// File automatically generated at 01/03/2019 16:03:42 by commercelayer-js-sdk-codegen
 
 
 const commercelayer = require('../index')
@@ -17,18 +17,20 @@ describe("CreditCards", function() {
 
 	// CreditCards.create
 	if (permissions.CreditCards && permissions.CreditCards.includes('create'))
+	if (data.CreditCards && data.CreditCards.create)
 	    it("create", function() {
-	        return commercelayer.createCreditCard(new commercelayer.model.CreditCard())
+	        return commercelayer.createCreditCard(new commercelayer.model.CreditCard().setFields(data.CreditCards.create))
 	            .then(response => {
 	                expect(response.get('id')).not.toBeNull();                
 	            })
 	    });
+	else console.log('Test CreditCards.create skipped: missing required test data')
 	else console.log('Test CreditCards.create skipped: missing required resource permission')
 
 
 	// CreditCards.retrieve
 	if (permissions.CreditCards && permissions.CreditCards.includes('retrieve'))
-	if (data.CreditCards && data.CreditCards.update)
+	if (data.CreditCards && data.CreditCards.retrieve)
 	    it("retrieve", function() {
 	        return commercelayer.retrieveCreditCard(data.CreditCards.retrieve.id)
 	            .then(response => {
@@ -43,10 +45,13 @@ describe("CreditCards", function() {
 	if (permissions.CreditCards && permissions.CreditCards.includes('update'))
 	if (data.CreditCards && data.CreditCards.update)
 	    it("update", function() {
-	        return commercelayer.updateCreditCard(data.CreditCards.update.id, new commercelayer.model.CreditCard().setFields(data.CreditCards.update.fields))
+	        return commercelayer.updateCreditCard(data.CreditCards.update.id, new commercelayer.model.CreditCard().setFields(data.CreditCards.update))
 	            .then(response => {
-	                Object.keys(data.CreditCards.update.fields).forEach(field => {
-	                    expect(response.get(field)).toBe(data.CreditCards.update.fields[field])
+	                Object.keys(data.CreditCards.update).forEach(field => {
+	                	if (commercelayer.model.helper.isApiResource(data.CreditCards.update[field])) {
+							console.log('Evaluation of resource object not supported ['  + field + ']')
+						}
+	                    else expect(response.get(field)).toBe(data.CreditCards.update[field])
 	                })
 	            })
 	    });

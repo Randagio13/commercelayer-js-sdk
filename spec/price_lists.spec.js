@@ -1,4 +1,4 @@
-// File automatically generated at 26/02/2019 18:21:08 by commercelayer-js-sdk-codegen
+// File automatically generated at 01/03/2019 16:03:42 by commercelayer-js-sdk-codegen
 
 
 const commercelayer = require('../index')
@@ -17,18 +17,20 @@ describe("PriceLists", function() {
 
 	// PriceLists.create
 	if (permissions.PriceLists && permissions.PriceLists.includes('create'))
+	if (data.PriceLists && data.PriceLists.create)
 	    it("create", function() {
-	        return commercelayer.createPriceList(new commercelayer.model.PriceList())
+	        return commercelayer.createPriceList(new commercelayer.model.PriceList().setFields(data.PriceLists.create))
 	            .then(response => {
 	                expect(response.get('id')).not.toBeNull();                
 	            })
 	    });
+	else console.log('Test PriceLists.create skipped: missing required test data')
 	else console.log('Test PriceLists.create skipped: missing required resource permission')
 
 
 	// PriceLists.retrieve
 	if (permissions.PriceLists && permissions.PriceLists.includes('retrieve'))
-	if (data.PriceLists && data.PriceLists.update)
+	if (data.PriceLists && data.PriceLists.retrieve)
 	    it("retrieve", function() {
 	        return commercelayer.retrievePriceList(data.PriceLists.retrieve.id)
 	            .then(response => {
@@ -43,10 +45,13 @@ describe("PriceLists", function() {
 	if (permissions.PriceLists && permissions.PriceLists.includes('update'))
 	if (data.PriceLists && data.PriceLists.update)
 	    it("update", function() {
-	        return commercelayer.updatePriceList(data.PriceLists.update.id, new commercelayer.model.PriceList().setFields(data.PriceLists.update.fields))
+	        return commercelayer.updatePriceList(data.PriceLists.update.id, new commercelayer.model.PriceList().setFields(data.PriceLists.update))
 	            .then(response => {
-	                Object.keys(data.PriceLists.update.fields).forEach(field => {
-	                    expect(response.get(field)).toBe(data.PriceLists.update.fields[field])
+	                Object.keys(data.PriceLists.update).forEach(field => {
+	                	if (commercelayer.model.helper.isApiResource(data.PriceLists.update[field])) {
+							console.log('Evaluation of resource object not supported ['  + field + ']')
+						}
+	                    else expect(response.get(field)).toBe(data.PriceLists.update[field])
 	                })
 	            })
 	    });

@@ -1,4 +1,4 @@
-// File automatically generated at 26/02/2019 18:21:08 by commercelayer-js-sdk-codegen
+// File automatically generated at 01/03/2019 16:03:42 by commercelayer-js-sdk-codegen
 
 
 const commercelayer = require('../index')
@@ -17,18 +17,20 @@ describe("CustomerAddresses", function() {
 
 	// CustomerAddresses.create
 	if (permissions.CustomerAddresses && permissions.CustomerAddresses.includes('create'))
+	if (data.CustomerAddresses && data.CustomerAddresses.create)
 	    it("create", function() {
-	        return commercelayer.createCustomerAddress(new commercelayer.model.CustomerAddress())
+	        return commercelayer.createCustomerAddress(new commercelayer.model.CustomerAddress().setFields(data.CustomerAddresses.create))
 	            .then(response => {
 	                expect(response.get('id')).not.toBeNull();                
 	            })
 	    });
+	else console.log('Test CustomerAddresses.create skipped: missing required test data')
 	else console.log('Test CustomerAddresses.create skipped: missing required resource permission')
 
 
 	// CustomerAddresses.retrieve
 	if (permissions.CustomerAddresses && permissions.CustomerAddresses.includes('retrieve'))
-	if (data.CustomerAddresses && data.CustomerAddresses.update)
+	if (data.CustomerAddresses && data.CustomerAddresses.retrieve)
 	    it("retrieve", function() {
 	        return commercelayer.retrieveCustomerAddress(data.CustomerAddresses.retrieve.id)
 	            .then(response => {
@@ -43,10 +45,13 @@ describe("CustomerAddresses", function() {
 	if (permissions.CustomerAddresses && permissions.CustomerAddresses.includes('update'))
 	if (data.CustomerAddresses && data.CustomerAddresses.update)
 	    it("update", function() {
-	        return commercelayer.updateCustomerAddress(data.CustomerAddresses.update.id, new commercelayer.model.CustomerAddress().setFields(data.CustomerAddresses.update.fields))
+	        return commercelayer.updateCustomerAddress(data.CustomerAddresses.update.id, new commercelayer.model.CustomerAddress().setFields(data.CustomerAddresses.update))
 	            .then(response => {
-	                Object.keys(data.CustomerAddresses.update.fields).forEach(field => {
-	                    expect(response.get(field)).toBe(data.CustomerAddresses.update.fields[field])
+	                Object.keys(data.CustomerAddresses.update).forEach(field => {
+	                	if (commercelayer.model.helper.isApiResource(data.CustomerAddresses.update[field])) {
+							console.log('Evaluation of resource object not supported ['  + field + ']')
+						}
+	                    else expect(response.get(field)).toBe(data.CustomerAddresses.update[field])
 	                })
 	            })
 	    });

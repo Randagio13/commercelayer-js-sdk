@@ -1,4 +1,4 @@
-// File automatically generated at 26/02/2019 18:21:08 by commercelayer-js-sdk-codegen
+// File automatically generated at 01/03/2019 16:03:42 by commercelayer-js-sdk-codegen
 
 
 const commercelayer = require('../index')
@@ -17,18 +17,20 @@ describe("DeliveryLeadTimes", function() {
 
 	// DeliveryLeadTimes.create
 	if (permissions.DeliveryLeadTimes && permissions.DeliveryLeadTimes.includes('create'))
+	if (data.DeliveryLeadTimes && data.DeliveryLeadTimes.create)
 	    it("create", function() {
-	        return commercelayer.createDeliveryLeadTime(new commercelayer.model.DeliveryLeadTime())
+	        return commercelayer.createDeliveryLeadTime(new commercelayer.model.DeliveryLeadTime().setFields(data.DeliveryLeadTimes.create))
 	            .then(response => {
 	                expect(response.get('id')).not.toBeNull();                
 	            })
 	    });
+	else console.log('Test DeliveryLeadTimes.create skipped: missing required test data')
 	else console.log('Test DeliveryLeadTimes.create skipped: missing required resource permission')
 
 
 	// DeliveryLeadTimes.retrieve
 	if (permissions.DeliveryLeadTimes && permissions.DeliveryLeadTimes.includes('retrieve'))
-	if (data.DeliveryLeadTimes && data.DeliveryLeadTimes.update)
+	if (data.DeliveryLeadTimes && data.DeliveryLeadTimes.retrieve)
 	    it("retrieve", function() {
 	        return commercelayer.retrieveDeliveryLeadTime(data.DeliveryLeadTimes.retrieve.id)
 	            .then(response => {
@@ -43,10 +45,13 @@ describe("DeliveryLeadTimes", function() {
 	if (permissions.DeliveryLeadTimes && permissions.DeliveryLeadTimes.includes('update'))
 	if (data.DeliveryLeadTimes && data.DeliveryLeadTimes.update)
 	    it("update", function() {
-	        return commercelayer.updateDeliveryLeadTime(data.DeliveryLeadTimes.update.id, new commercelayer.model.DeliveryLeadTime().setFields(data.DeliveryLeadTimes.update.fields))
+	        return commercelayer.updateDeliveryLeadTime(data.DeliveryLeadTimes.update.id, new commercelayer.model.DeliveryLeadTime().setFields(data.DeliveryLeadTimes.update))
 	            .then(response => {
-	                Object.keys(data.DeliveryLeadTimes.update.fields).forEach(field => {
-	                    expect(response.get(field)).toBe(data.DeliveryLeadTimes.update.fields[field])
+	                Object.keys(data.DeliveryLeadTimes.update).forEach(field => {
+	                	if (commercelayer.model.helper.isApiResource(data.DeliveryLeadTimes.update[field])) {
+							console.log('Evaluation of resource object not supported ['  + field + ']')
+						}
+	                    else expect(response.get(field)).toBe(data.DeliveryLeadTimes.update[field])
 	                })
 	            })
 	    });

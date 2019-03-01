@@ -1,4 +1,4 @@
-// File automatically generated at 26/02/2019 18:21:08 by commercelayer-js-sdk-codegen
+// File automatically generated at 01/03/2019 16:03:42 by commercelayer-js-sdk-codegen
 
 
 const commercelayer = require('../index')
@@ -17,18 +17,20 @@ describe("Skus", function() {
 
 	// Skus.create
 	if (permissions.Skus && permissions.Skus.includes('create'))
+	if (data.Skus && data.Skus.create)
 	    it("create", function() {
-	        return commercelayer.createSku(new commercelayer.model.Sku())
+	        return commercelayer.createSku(new commercelayer.model.Sku().setFields(data.Skus.create))
 	            .then(response => {
 	                expect(response.get('id')).not.toBeNull();                
 	            })
 	    });
+	else console.log('Test Skus.create skipped: missing required test data')
 	else console.log('Test Skus.create skipped: missing required resource permission')
 
 
 	// Skus.retrieve
 	if (permissions.Skus && permissions.Skus.includes('retrieve'))
-	if (data.Skus && data.Skus.update)
+	if (data.Skus && data.Skus.retrieve)
 	    it("retrieve", function() {
 	        return commercelayer.retrieveSku(data.Skus.retrieve.id)
 	            .then(response => {
@@ -43,10 +45,13 @@ describe("Skus", function() {
 	if (permissions.Skus && permissions.Skus.includes('update'))
 	if (data.Skus && data.Skus.update)
 	    it("update", function() {
-	        return commercelayer.updateSku(data.Skus.update.id, new commercelayer.model.Sku().setFields(data.Skus.update.fields))
+	        return commercelayer.updateSku(data.Skus.update.id, new commercelayer.model.Sku().setFields(data.Skus.update))
 	            .then(response => {
-	                Object.keys(data.Skus.update.fields).forEach(field => {
-	                    expect(response.get(field)).toBe(data.Skus.update.fields[field])
+	                Object.keys(data.Skus.update).forEach(field => {
+	                	if (commercelayer.model.helper.isApiResource(data.Skus.update[field])) {
+							console.log('Evaluation of resource object not supported ['  + field + ']')
+						}
+	                    else expect(response.get(field)).toBe(data.Skus.update[field])
 	                })
 	            })
 	    });
