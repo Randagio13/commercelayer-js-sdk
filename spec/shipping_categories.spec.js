@@ -1,4 +1,4 @@
-// File automatically generated at 01/03/2019 16:03:42 by commercelayer-js-sdk-codegen
+// File automatically generated at 01/03/2019 18:57:42 by commercelayer-js-sdk-codegen
 
 
 const commercelayer = require('../index')
