@@ -5,6 +5,7 @@ const commercelayer = require('../index')
 const permissions = require('./support/permissions')
 const config = require('./support/config')
 const data = require('./support/data')
+const utils = require('./support/utils')
 
 
 describe("Addresses", function() {
@@ -24,8 +25,8 @@ describe("Addresses", function() {
 	                expect(response.get('id')).not.toBeNull();                
 	            })
 	    });
-	else console.log('Test Addresses.create skipped: missing required test data')
-	else console.log('Test Addresses.create skipped: missing required resource permission')
+	else utils.missingRequiredData('Addresses.create')
+	else utils.missingRequiredPermission('Addresses.create')
 
 
 	// Addresses.retrieve
