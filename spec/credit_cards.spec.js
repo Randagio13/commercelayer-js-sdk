@@ -1,13 +1,17 @@
-// File automatically generated at 01/03/2019 18:57:42 by commercelayer-js-sdk-codegen
+// File automatically generated at 02/03/2019 19:27:59 by commercelayer-js-sdk-codegen
 
 
 const commercelayer = require('../index')
 const permissions = require('./support/permissions')
 const config = require('./support/config')
 const data = require('./support/data')
+const utils = require('./support/utils')
 
 
-describe("CreditCards", function() {
+const SPEC_NAME = "CreditCards";
+
+
+describe(SPEC_NAME, function() {
 
     beforeAll(function() {
         commercelayer.initialize(config);
@@ -21,11 +25,13 @@ describe("CreditCards", function() {
 	    it("create", function() {
 	        return commercelayer.createCreditCard(new commercelayer.model.CreditCard().setFields(data.CreditCards.create))
 	            .then(response => {
-	                expect(response.get('id')).not.toBeNull();                
+	                const id = response.get('id');
+					console.log('Created CreditCard with id ' + id)
+					expect(id).not.toBeNull();
 	            })
 	    });
-	else console.log('Test CreditCards.create skipped: missing required test data')
-	else console.log('Test CreditCards.create skipped: missing required resource permission')
+	else utils.missingRequiredData(SPEC_NAME, 'create')
+	else utils.missingRequiredPermission(SPEC_NAME, 'create')
 
 
 	// CreditCards.retrieve
@@ -34,29 +40,31 @@ describe("CreditCards", function() {
 	    it("retrieve", function() {
 	        return commercelayer.retrieveCreditCard(data.CreditCards.retrieve.id)
 	            .then(response => {
-	                expect(response.get('id')).toBe(data.CreditCards.retrieve.id)
+	                expect(response.get('id')).toBe(data.CreditCards.retrieve.id.toString())
 	            })
 	    });
-	else console.log('Test CreditCards.retrieve skipped: missing required test data')
-	else console.log('Test CreditCards.retrieve skipped: missing required resource permission')
+	else utils.missingRequiredData(SPEC_NAME, 'retrieve')
+	else utils.missingRequiredPermission(SPEC_NAME, 'retrieve')
 
 
 	// CreditCards.update
 	if (permissions.CreditCards && permissions.CreditCards.includes('update'))
 	if (data.CreditCards && data.CreditCards.update)
 	    it("update", function() {
-	        return commercelayer.updateCreditCard(data.CreditCards.update.id, new commercelayer.model.CreditCard().setFields(data.CreditCards.update))
+	    	let qf = utils.buildQueryFilter(data.CreditCards.update);
+			let credit_card = new commercelayer.model.CreditCard().setFields(data.CreditCards.update);
+	        return commercelayer.updateCreditCard(data.CreditCards.update.id, credit_card, qf)
 	            .then(response => {
 	                Object.keys(data.CreditCards.update).forEach(field => {
-	                	if (commercelayer.model.helper.isApiResource(data.CreditCards.update[field])) {
-							console.log('Evaluation of resource object not supported ['  + field + ']')
-						}
-	                    else expect(response.get(field)).toBe(data.CreditCards.update[field])
+	                	if (commercelayer.model.helper.isApiResource(data.CreditCards.update[field]))
+							expect(response.get([field+'.id'])[field].id).toBe(data.CreditCards.update[field].id.toString())
+						else
+							expect(utils.toString(response.get(field))).toBe(data.CreditCards.update[field].toString())
 	                })
 	            })
 	    });
-	else console.log('Test CreditCards.update skipped: missing required test data')
-	else console.log('Test CreditCards.update skipped: missing required resource permission')
+	else utils.missingRequiredData(SPEC_NAME, 'update')
+	else utils.missingRequiredPermission(SPEC_NAME, 'update')
 
 
 	// CreditCards.list
@@ -67,7 +75,7 @@ describe("CreditCards", function() {
 	                expect(response.get(['id']).length).toBeGreaterThan(0)
 	            })
 	    });
-	else console.log('Test CreditCards.list skipped: missing required resource permission')
+	else utils.missingRequiredPermission(SPEC_NAME, 'list')
 
   });
   

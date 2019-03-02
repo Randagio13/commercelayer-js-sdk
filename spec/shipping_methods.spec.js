@@ -1,13 +1,17 @@
-// File automatically generated at 01/03/2019 18:57:42 by commercelayer-js-sdk-codegen
+// File automatically generated at 02/03/2019 19:27:59 by commercelayer-js-sdk-codegen
 
 
 const commercelayer = require('../index')
 const permissions = require('./support/permissions')
 const config = require('./support/config')
 const data = require('./support/data')
+const utils = require('./support/utils')
 
 
-describe("ShippingMethods", function() {
+const SPEC_NAME = "ShippingMethods";
+
+
+describe(SPEC_NAME, function() {
 
     beforeAll(function() {
         commercelayer.initialize(config);
@@ -21,11 +25,13 @@ describe("ShippingMethods", function() {
 	    it("create", function() {
 	        return commercelayer.createShippingMethod(new commercelayer.model.ShippingMethod().setFields(data.ShippingMethods.create))
 	            .then(response => {
-	                expect(response.get('id')).not.toBeNull();                
+	                const id = response.get('id');
+					console.log('Created ShippingMethod with id ' + id)
+					expect(id).not.toBeNull();
 	            })
 	    });
-	else console.log('Test ShippingMethods.create skipped: missing required test data')
-	else console.log('Test ShippingMethods.create skipped: missing required resource permission')
+	else utils.missingRequiredData(SPEC_NAME, 'create')
+	else utils.missingRequiredPermission(SPEC_NAME, 'create')
 
 
 	// ShippingMethods.retrieve
@@ -34,29 +40,31 @@ describe("ShippingMethods", function() {
 	    it("retrieve", function() {
 	        return commercelayer.retrieveShippingMethod(data.ShippingMethods.retrieve.id)
 	            .then(response => {
-	                expect(response.get('id')).toBe(data.ShippingMethods.retrieve.id)
+	                expect(response.get('id')).toBe(data.ShippingMethods.retrieve.id.toString())
 	            })
 	    });
-	else console.log('Test ShippingMethods.retrieve skipped: missing required test data')
-	else console.log('Test ShippingMethods.retrieve skipped: missing required resource permission')
+	else utils.missingRequiredData(SPEC_NAME, 'retrieve')
+	else utils.missingRequiredPermission(SPEC_NAME, 'retrieve')
 
 
 	// ShippingMethods.update
 	if (permissions.ShippingMethods && permissions.ShippingMethods.includes('update'))
 	if (data.ShippingMethods && data.ShippingMethods.update)
 	    it("update", function() {
-	        return commercelayer.updateShippingMethod(data.ShippingMethods.update.id, new commercelayer.model.ShippingMethod().setFields(data.ShippingMethods.update))
+	    	let qf = utils.buildQueryFilter(data.ShippingMethods.update);
+			let shipping_method = new commercelayer.model.ShippingMethod().setFields(data.ShippingMethods.update);
+	        return commercelayer.updateShippingMethod(data.ShippingMethods.update.id, shipping_method, qf)
 	            .then(response => {
 	                Object.keys(data.ShippingMethods.update).forEach(field => {
-	                	if (commercelayer.model.helper.isApiResource(data.ShippingMethods.update[field])) {
-							console.log('Evaluation of resource object not supported ['  + field + ']')
-						}
-	                    else expect(response.get(field)).toBe(data.ShippingMethods.update[field])
+	                	if (commercelayer.model.helper.isApiResource(data.ShippingMethods.update[field]))
+							expect(response.get([field+'.id'])[field].id).toBe(data.ShippingMethods.update[field].id.toString())
+						else
+							expect(utils.toString(response.get(field))).toBe(data.ShippingMethods.update[field].toString())
 	                })
 	            })
 	    });
-	else console.log('Test ShippingMethods.update skipped: missing required test data')
-	else console.log('Test ShippingMethods.update skipped: missing required resource permission')
+	else utils.missingRequiredData(SPEC_NAME, 'update')
+	else utils.missingRequiredPermission(SPEC_NAME, 'update')
 
 
 	// ShippingMethods.list
@@ -67,7 +75,7 @@ describe("ShippingMethods", function() {
 	                expect(response.get(['id']).length).toBeGreaterThan(0)
 	            })
 	    });
-	else console.log('Test ShippingMethods.list skipped: missing required resource permission')
+	else utils.missingRequiredPermission(SPEC_NAME, 'list')
 
   });
   

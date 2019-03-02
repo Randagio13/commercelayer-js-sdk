@@ -1,13 +1,17 @@
-// File automatically generated at 01/03/2019 18:57:42 by commercelayer-js-sdk-codegen
+// File automatically generated at 02/03/2019 19:27:59 by commercelayer-js-sdk-codegen
 
 
 const commercelayer = require('../index')
 const permissions = require('./support/permissions')
 const config = require('./support/config')
 const data = require('./support/data')
+const utils = require('./support/utils')
 
 
-describe("WireTransfers", function() {
+const SPEC_NAME = "WireTransfers";
+
+
+describe(SPEC_NAME, function() {
 
     beforeAll(function() {
         commercelayer.initialize(config);
@@ -21,11 +25,13 @@ describe("WireTransfers", function() {
 	    it("create", function() {
 	        return commercelayer.createWireTransfer(new commercelayer.model.WireTransfer().setFields(data.WireTransfers.create))
 	            .then(response => {
-	                expect(response.get('id')).not.toBeNull();                
+	                const id = response.get('id');
+					console.log('Created WireTransfer with id ' + id)
+					expect(id).not.toBeNull();
 	            })
 	    });
-	else console.log('Test WireTransfers.create skipped: missing required test data')
-	else console.log('Test WireTransfers.create skipped: missing required resource permission')
+	else utils.missingRequiredData(SPEC_NAME, 'create')
+	else utils.missingRequiredPermission(SPEC_NAME, 'create')
 
 
 	// WireTransfers.retrieve
@@ -34,29 +40,31 @@ describe("WireTransfers", function() {
 	    it("retrieve", function() {
 	        return commercelayer.retrieveWireTransfer(data.WireTransfers.retrieve.id)
 	            .then(response => {
-	                expect(response.get('id')).toBe(data.WireTransfers.retrieve.id)
+	                expect(response.get('id')).toBe(data.WireTransfers.retrieve.id.toString())
 	            })
 	    });
-	else console.log('Test WireTransfers.retrieve skipped: missing required test data')
-	else console.log('Test WireTransfers.retrieve skipped: missing required resource permission')
+	else utils.missingRequiredData(SPEC_NAME, 'retrieve')
+	else utils.missingRequiredPermission(SPEC_NAME, 'retrieve')
 
 
 	// WireTransfers.update
 	if (permissions.WireTransfers && permissions.WireTransfers.includes('update'))
 	if (data.WireTransfers && data.WireTransfers.update)
 	    it("update", function() {
-	        return commercelayer.updateWireTransfer(data.WireTransfers.update.id, new commercelayer.model.WireTransfer().setFields(data.WireTransfers.update))
+	    	let qf = utils.buildQueryFilter(data.WireTransfers.update);
+			let wire_transfer = new commercelayer.model.WireTransfer().setFields(data.WireTransfers.update);
+	        return commercelayer.updateWireTransfer(data.WireTransfers.update.id, wire_transfer, qf)
 	            .then(response => {
 	                Object.keys(data.WireTransfers.update).forEach(field => {
-	                	if (commercelayer.model.helper.isApiResource(data.WireTransfers.update[field])) {
-							console.log('Evaluation of resource object not supported ['  + field + ']')
-						}
-	                    else expect(response.get(field)).toBe(data.WireTransfers.update[field])
+	                	if (commercelayer.model.helper.isApiResource(data.WireTransfers.update[field]))
+							expect(response.get([field+'.id'])[field].id).toBe(data.WireTransfers.update[field].id.toString())
+						else
+							expect(utils.toString(response.get(field))).toBe(data.WireTransfers.update[field].toString())
 	                })
 	            })
 	    });
-	else console.log('Test WireTransfers.update skipped: missing required test data')
-	else console.log('Test WireTransfers.update skipped: missing required resource permission')
+	else utils.missingRequiredData(SPEC_NAME, 'update')
+	else utils.missingRequiredPermission(SPEC_NAME, 'update')
 
 
 	// WireTransfers.list
@@ -67,7 +75,7 @@ describe("WireTransfers", function() {
 	                expect(response.get(['id']).length).toBeGreaterThan(0)
 	            })
 	    });
-	else console.log('Test WireTransfers.list skipped: missing required resource permission')
+	else utils.missingRequiredPermission(SPEC_NAME, 'list')
 
   });
   

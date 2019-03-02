@@ -1,13 +1,17 @@
-// File automatically generated at 01/03/2019 18:57:42 by commercelayer-js-sdk-codegen
+// File automatically generated at 02/03/2019 19:27:59 by commercelayer-js-sdk-codegen
 
 
 const commercelayer = require('../index')
 const permissions = require('./support/permissions')
 const config = require('./support/config')
 const data = require('./support/data')
+const utils = require('./support/utils')
 
 
-describe("StockLevels", function() {
+const SPEC_NAME = "StockLevels";
+
+
+describe(SPEC_NAME, function() {
 
     beforeAll(function() {
         commercelayer.initialize(config);
@@ -21,11 +25,13 @@ describe("StockLevels", function() {
 	    it("create", function() {
 	        return commercelayer.createStockLevel(new commercelayer.model.StockLevel().setFields(data.StockLevels.create))
 	            .then(response => {
-	                expect(response.get('id')).not.toBeNull();                
+	                const id = response.get('id');
+					console.log('Created StockLevel with id ' + id)
+					expect(id).not.toBeNull();
 	            })
 	    });
-	else console.log('Test StockLevels.create skipped: missing required test data')
-	else console.log('Test StockLevels.create skipped: missing required resource permission')
+	else utils.missingRequiredData(SPEC_NAME, 'create')
+	else utils.missingRequiredPermission(SPEC_NAME, 'create')
 
 
 	// StockLevels.retrieve
@@ -34,29 +40,31 @@ describe("StockLevels", function() {
 	    it("retrieve", function() {
 	        return commercelayer.retrieveStockLevel(data.StockLevels.retrieve.id)
 	            .then(response => {
-	                expect(response.get('id')).toBe(data.StockLevels.retrieve.id)
+	                expect(response.get('id')).toBe(data.StockLevels.retrieve.id.toString())
 	            })
 	    });
-	else console.log('Test StockLevels.retrieve skipped: missing required test data')
-	else console.log('Test StockLevels.retrieve skipped: missing required resource permission')
+	else utils.missingRequiredData(SPEC_NAME, 'retrieve')
+	else utils.missingRequiredPermission(SPEC_NAME, 'retrieve')
 
 
 	// StockLevels.update
 	if (permissions.StockLevels && permissions.StockLevels.includes('update'))
 	if (data.StockLevels && data.StockLevels.update)
 	    it("update", function() {
-	        return commercelayer.updateStockLevel(data.StockLevels.update.id, new commercelayer.model.StockLevel().setFields(data.StockLevels.update))
+	    	let qf = utils.buildQueryFilter(data.StockLevels.update);
+			let stock_level = new commercelayer.model.StockLevel().setFields(data.StockLevels.update);
+	        return commercelayer.updateStockLevel(data.StockLevels.update.id, stock_level, qf)
 	            .then(response => {
 	                Object.keys(data.StockLevels.update).forEach(field => {
-	                	if (commercelayer.model.helper.isApiResource(data.StockLevels.update[field])) {
-							console.log('Evaluation of resource object not supported ['  + field + ']')
-						}
-	                    else expect(response.get(field)).toBe(data.StockLevels.update[field])
+	                	if (commercelayer.model.helper.isApiResource(data.StockLevels.update[field]))
+							expect(response.get([field+'.id'])[field].id).toBe(data.StockLevels.update[field].id.toString())
+						else
+							expect(utils.toString(response.get(field))).toBe(data.StockLevels.update[field].toString())
 	                })
 	            })
 	    });
-	else console.log('Test StockLevels.update skipped: missing required test data')
-	else console.log('Test StockLevels.update skipped: missing required resource permission')
+	else utils.missingRequiredData(SPEC_NAME, 'update')
+	else utils.missingRequiredPermission(SPEC_NAME, 'update')
 
 
 	// StockLevels.list
@@ -67,7 +75,7 @@ describe("StockLevels", function() {
 	                expect(response.get(['id']).length).toBeGreaterThan(0)
 	            })
 	    });
-	else console.log('Test StockLevels.list skipped: missing required resource permission')
+	else utils.missingRequiredPermission(SPEC_NAME, 'list')
 
   });
   

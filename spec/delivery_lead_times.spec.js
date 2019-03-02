@@ -1,13 +1,17 @@
-// File automatically generated at 01/03/2019 18:57:42 by commercelayer-js-sdk-codegen
+// File automatically generated at 02/03/2019 19:27:59 by commercelayer-js-sdk-codegen
 
 
 const commercelayer = require('../index')
 const permissions = require('./support/permissions')
 const config = require('./support/config')
 const data = require('./support/data')
+const utils = require('./support/utils')
 
 
-describe("DeliveryLeadTimes", function() {
+const SPEC_NAME = "DeliveryLeadTimes";
+
+
+describe(SPEC_NAME, function() {
 
     beforeAll(function() {
         commercelayer.initialize(config);
@@ -21,11 +25,13 @@ describe("DeliveryLeadTimes", function() {
 	    it("create", function() {
 	        return commercelayer.createDeliveryLeadTime(new commercelayer.model.DeliveryLeadTime().setFields(data.DeliveryLeadTimes.create))
 	            .then(response => {
-	                expect(response.get('id')).not.toBeNull();                
+	                const id = response.get('id');
+					console.log('Created DeliveryLeadTime with id ' + id)
+					expect(id).not.toBeNull();
 	            })
 	    });
-	else console.log('Test DeliveryLeadTimes.create skipped: missing required test data')
-	else console.log('Test DeliveryLeadTimes.create skipped: missing required resource permission')
+	else utils.missingRequiredData(SPEC_NAME, 'create')
+	else utils.missingRequiredPermission(SPEC_NAME, 'create')
 
 
 	// DeliveryLeadTimes.retrieve
@@ -34,29 +40,31 @@ describe("DeliveryLeadTimes", function() {
 	    it("retrieve", function() {
 	        return commercelayer.retrieveDeliveryLeadTime(data.DeliveryLeadTimes.retrieve.id)
 	            .then(response => {
-	                expect(response.get('id')).toBe(data.DeliveryLeadTimes.retrieve.id)
+	                expect(response.get('id')).toBe(data.DeliveryLeadTimes.retrieve.id.toString())
 	            })
 	    });
-	else console.log('Test DeliveryLeadTimes.retrieve skipped: missing required test data')
-	else console.log('Test DeliveryLeadTimes.retrieve skipped: missing required resource permission')
+	else utils.missingRequiredData(SPEC_NAME, 'retrieve')
+	else utils.missingRequiredPermission(SPEC_NAME, 'retrieve')
 
 
 	// DeliveryLeadTimes.update
 	if (permissions.DeliveryLeadTimes && permissions.DeliveryLeadTimes.includes('update'))
 	if (data.DeliveryLeadTimes && data.DeliveryLeadTimes.update)
 	    it("update", function() {
-	        return commercelayer.updateDeliveryLeadTime(data.DeliveryLeadTimes.update.id, new commercelayer.model.DeliveryLeadTime().setFields(data.DeliveryLeadTimes.update))
+	    	let qf = utils.buildQueryFilter(data.DeliveryLeadTimes.update);
+			let delivery_lead_time = new commercelayer.model.DeliveryLeadTime().setFields(data.DeliveryLeadTimes.update);
+	        return commercelayer.updateDeliveryLeadTime(data.DeliveryLeadTimes.update.id, delivery_lead_time, qf)
 	            .then(response => {
 	                Object.keys(data.DeliveryLeadTimes.update).forEach(field => {
-	                	if (commercelayer.model.helper.isApiResource(data.DeliveryLeadTimes.update[field])) {
-							console.log('Evaluation of resource object not supported ['  + field + ']')
-						}
-	                    else expect(response.get(field)).toBe(data.DeliveryLeadTimes.update[field])
+	                	if (commercelayer.model.helper.isApiResource(data.DeliveryLeadTimes.update[field]))
+							expect(response.get([field+'.id'])[field].id).toBe(data.DeliveryLeadTimes.update[field].id.toString())
+						else
+							expect(utils.toString(response.get(field))).toBe(data.DeliveryLeadTimes.update[field].toString())
 	                })
 	            })
 	    });
-	else console.log('Test DeliveryLeadTimes.update skipped: missing required test data')
-	else console.log('Test DeliveryLeadTimes.update skipped: missing required resource permission')
+	else utils.missingRequiredData(SPEC_NAME, 'update')
+	else utils.missingRequiredPermission(SPEC_NAME, 'update')
 
 
 	// DeliveryLeadTimes.list
@@ -67,7 +75,7 @@ describe("DeliveryLeadTimes", function() {
 	                expect(response.get(['id']).length).toBeGreaterThan(0)
 	            })
 	    });
-	else console.log('Test DeliveryLeadTimes.list skipped: missing required resource permission')
+	else utils.missingRequiredPermission(SPEC_NAME, 'list')
 
   });
   

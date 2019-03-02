@@ -1,13 +1,17 @@
-// File automatically generated at 01/03/2019 18:57:42 by commercelayer-js-sdk-codegen
+// File automatically generated at 02/03/2019 19:27:59 by commercelayer-js-sdk-codegen
 
 
 const commercelayer = require('../index')
 const permissions = require('./support/permissions')
 const config = require('./support/config')
 const data = require('./support/data')
+const utils = require('./support/utils')
 
 
-describe("Shipments", function() {
+const SPEC_NAME = "Shipments";
+
+
+describe(SPEC_NAME, function() {
 
     beforeAll(function() {
         commercelayer.initialize(config);
@@ -21,11 +25,13 @@ describe("Shipments", function() {
 	    it("create", function() {
 	        return commercelayer.createShipment(new commercelayer.model.Shipment().setFields(data.Shipments.create))
 	            .then(response => {
-	                expect(response.get('id')).not.toBeNull();                
+	                const id = response.get('id');
+					console.log('Created Shipment with id ' + id)
+					expect(id).not.toBeNull();
 	            })
 	    });
-	else console.log('Test Shipments.create skipped: missing required test data')
-	else console.log('Test Shipments.create skipped: missing required resource permission')
+	else utils.missingRequiredData(SPEC_NAME, 'create')
+	else utils.missingRequiredPermission(SPEC_NAME, 'create')
 
 
 	// Shipments.retrieve
@@ -34,29 +40,31 @@ describe("Shipments", function() {
 	    it("retrieve", function() {
 	        return commercelayer.retrieveShipment(data.Shipments.retrieve.id)
 	            .then(response => {
-	                expect(response.get('id')).toBe(data.Shipments.retrieve.id)
+	                expect(response.get('id')).toBe(data.Shipments.retrieve.id.toString())
 	            })
 	    });
-	else console.log('Test Shipments.retrieve skipped: missing required test data')
-	else console.log('Test Shipments.retrieve skipped: missing required resource permission')
+	else utils.missingRequiredData(SPEC_NAME, 'retrieve')
+	else utils.missingRequiredPermission(SPEC_NAME, 'retrieve')
 
 
 	// Shipments.update
 	if (permissions.Shipments && permissions.Shipments.includes('update'))
 	if (data.Shipments && data.Shipments.update)
 	    it("update", function() {
-	        return commercelayer.updateShipment(data.Shipments.update.id, new commercelayer.model.Shipment().setFields(data.Shipments.update))
+	    	let qf = utils.buildQueryFilter(data.Shipments.update);
+			let shipment = new commercelayer.model.Shipment().setFields(data.Shipments.update);
+	        return commercelayer.updateShipment(data.Shipments.update.id, shipment, qf)
 	            .then(response => {
 	                Object.keys(data.Shipments.update).forEach(field => {
-	                	if (commercelayer.model.helper.isApiResource(data.Shipments.update[field])) {
-							console.log('Evaluation of resource object not supported ['  + field + ']')
-						}
-	                    else expect(response.get(field)).toBe(data.Shipments.update[field])
+	                	if (commercelayer.model.helper.isApiResource(data.Shipments.update[field]))
+							expect(response.get([field+'.id'])[field].id).toBe(data.Shipments.update[field].id.toString())
+						else
+							expect(utils.toString(response.get(field))).toBe(data.Shipments.update[field].toString())
 	                })
 	            })
 	    });
-	else console.log('Test Shipments.update skipped: missing required test data')
-	else console.log('Test Shipments.update skipped: missing required resource permission')
+	else utils.missingRequiredData(SPEC_NAME, 'update')
+	else utils.missingRequiredPermission(SPEC_NAME, 'update')
 
 
 	// Shipments.list
@@ -67,7 +75,7 @@ describe("Shipments", function() {
 	                expect(response.get(['id']).length).toBeGreaterThan(0)
 	            })
 	    });
-	else console.log('Test Shipments.list skipped: missing required resource permission')
+	else utils.missingRequiredPermission(SPEC_NAME, 'list')
 
   });
   

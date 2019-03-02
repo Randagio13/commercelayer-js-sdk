@@ -1,13 +1,17 @@
-// File automatically generated at 01/03/2019 18:57:42 by commercelayer-js-sdk-codegen
+// File automatically generated at 02/03/2019 19:27:59 by commercelayer-js-sdk-codegen
 
 
 const commercelayer = require('../index')
 const permissions = require('./support/permissions')
 const config = require('./support/config')
 const data = require('./support/data')
+const utils = require('./support/utils')
 
 
-describe("CustomerPasswordResets", function() {
+const SPEC_NAME = "CustomerPasswordResets";
+
+
+describe(SPEC_NAME, function() {
 
     beforeAll(function() {
         commercelayer.initialize(config);
@@ -21,11 +25,13 @@ describe("CustomerPasswordResets", function() {
 	    it("create", function() {
 	        return commercelayer.createCustomerPasswordReset(new commercelayer.model.CustomerPasswordReset().setFields(data.CustomerPasswordResets.create))
 	            .then(response => {
-	                expect(response.get('id')).not.toBeNull();                
+	                const id = response.get('id');
+					console.log('Created CustomerPasswordReset with id ' + id)
+					expect(id).not.toBeNull();
 	            })
 	    });
-	else console.log('Test CustomerPasswordResets.create skipped: missing required test data')
-	else console.log('Test CustomerPasswordResets.create skipped: missing required resource permission')
+	else utils.missingRequiredData(SPEC_NAME, 'create')
+	else utils.missingRequiredPermission(SPEC_NAME, 'create')
 
 
 	// CustomerPasswordResets.retrieve
@@ -34,29 +40,31 @@ describe("CustomerPasswordResets", function() {
 	    it("retrieve", function() {
 	        return commercelayer.retrieveCustomerPasswordReset(data.CustomerPasswordResets.retrieve.id)
 	            .then(response => {
-	                expect(response.get('id')).toBe(data.CustomerPasswordResets.retrieve.id)
+	                expect(response.get('id')).toBe(data.CustomerPasswordResets.retrieve.id.toString())
 	            })
 	    });
-	else console.log('Test CustomerPasswordResets.retrieve skipped: missing required test data')
-	else console.log('Test CustomerPasswordResets.retrieve skipped: missing required resource permission')
+	else utils.missingRequiredData(SPEC_NAME, 'retrieve')
+	else utils.missingRequiredPermission(SPEC_NAME, 'retrieve')
 
 
 	// CustomerPasswordResets.update
 	if (permissions.CustomerPasswordResets && permissions.CustomerPasswordResets.includes('update'))
 	if (data.CustomerPasswordResets && data.CustomerPasswordResets.update)
 	    it("update", function() {
-	        return commercelayer.updateCustomerPasswordReset(data.CustomerPasswordResets.update.id, new commercelayer.model.CustomerPasswordReset().setFields(data.CustomerPasswordResets.update))
+	    	let qf = utils.buildQueryFilter(data.CustomerPasswordResets.update);
+			let customer_password_reset = new commercelayer.model.CustomerPasswordReset().setFields(data.CustomerPasswordResets.update);
+	        return commercelayer.updateCustomerPasswordReset(data.CustomerPasswordResets.update.id, customer_password_reset, qf)
 	            .then(response => {
 	                Object.keys(data.CustomerPasswordResets.update).forEach(field => {
-	                	if (commercelayer.model.helper.isApiResource(data.CustomerPasswordResets.update[field])) {
-							console.log('Evaluation of resource object not supported ['  + field + ']')
-						}
-	                    else expect(response.get(field)).toBe(data.CustomerPasswordResets.update[field])
+	                	if (commercelayer.model.helper.isApiResource(data.CustomerPasswordResets.update[field]))
+							expect(response.get([field+'.id'])[field].id).toBe(data.CustomerPasswordResets.update[field].id.toString())
+						else
+							expect(utils.toString(response.get(field))).toBe(data.CustomerPasswordResets.update[field].toString())
 	                })
 	            })
 	    });
-	else console.log('Test CustomerPasswordResets.update skipped: missing required test data')
-	else console.log('Test CustomerPasswordResets.update skipped: missing required resource permission')
+	else utils.missingRequiredData(SPEC_NAME, 'update')
+	else utils.missingRequiredPermission(SPEC_NAME, 'update')
 
 
 	// CustomerPasswordResets.list
@@ -67,7 +75,7 @@ describe("CustomerPasswordResets", function() {
 	                expect(response.get(['id']).length).toBeGreaterThan(0)
 	            })
 	    });
-	else console.log('Test CustomerPasswordResets.list skipped: missing required resource permission')
+	else utils.missingRequiredPermission(SPEC_NAME, 'list')
 
   });
   

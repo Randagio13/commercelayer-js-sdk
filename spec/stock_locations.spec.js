@@ -1,13 +1,17 @@
-// File automatically generated at 01/03/2019 18:57:42 by commercelayer-js-sdk-codegen
+// File automatically generated at 02/03/2019 19:27:59 by commercelayer-js-sdk-codegen
 
 
 const commercelayer = require('../index')
 const permissions = require('./support/permissions')
 const config = require('./support/config')
 const data = require('./support/data')
+const utils = require('./support/utils')
 
 
-describe("StockLocations", function() {
+const SPEC_NAME = "StockLocations";
+
+
+describe(SPEC_NAME, function() {
 
     beforeAll(function() {
         commercelayer.initialize(config);
@@ -21,11 +25,13 @@ describe("StockLocations", function() {
 	    it("create", function() {
 	        return commercelayer.createStockLocation(new commercelayer.model.StockLocation().setFields(data.StockLocations.create))
 	            .then(response => {
-	                expect(response.get('id')).not.toBeNull();                
+	                const id = response.get('id');
+					console.log('Created StockLocation with id ' + id)
+					expect(id).not.toBeNull();
 	            })
 	    });
-	else console.log('Test StockLocations.create skipped: missing required test data')
-	else console.log('Test StockLocations.create skipped: missing required resource permission')
+	else utils.missingRequiredData(SPEC_NAME, 'create')
+	else utils.missingRequiredPermission(SPEC_NAME, 'create')
 
 
 	// StockLocations.retrieve
@@ -34,29 +40,31 @@ describe("StockLocations", function() {
 	    it("retrieve", function() {
 	        return commercelayer.retrieveStockLocation(data.StockLocations.retrieve.id)
 	            .then(response => {
-	                expect(response.get('id')).toBe(data.StockLocations.retrieve.id)
+	                expect(response.get('id')).toBe(data.StockLocations.retrieve.id.toString())
 	            })
 	    });
-	else console.log('Test StockLocations.retrieve skipped: missing required test data')
-	else console.log('Test StockLocations.retrieve skipped: missing required resource permission')
+	else utils.missingRequiredData(SPEC_NAME, 'retrieve')
+	else utils.missingRequiredPermission(SPEC_NAME, 'retrieve')
 
 
 	// StockLocations.update
 	if (permissions.StockLocations && permissions.StockLocations.includes('update'))
 	if (data.StockLocations && data.StockLocations.update)
 	    it("update", function() {
-	        return commercelayer.updateStockLocation(data.StockLocations.update.id, new commercelayer.model.StockLocation().setFields(data.StockLocations.update))
+	    	let qf = utils.buildQueryFilter(data.StockLocations.update);
+			let stock_location = new commercelayer.model.StockLocation().setFields(data.StockLocations.update);
+	        return commercelayer.updateStockLocation(data.StockLocations.update.id, stock_location, qf)
 	            .then(response => {
 	                Object.keys(data.StockLocations.update).forEach(field => {
-	                	if (commercelayer.model.helper.isApiResource(data.StockLocations.update[field])) {
-							console.log('Evaluation of resource object not supported ['  + field + ']')
-						}
-	                    else expect(response.get(field)).toBe(data.StockLocations.update[field])
+	                	if (commercelayer.model.helper.isApiResource(data.StockLocations.update[field]))
+							expect(response.get([field+'.id'])[field].id).toBe(data.StockLocations.update[field].id.toString())
+						else
+							expect(utils.toString(response.get(field))).toBe(data.StockLocations.update[field].toString())
 	                })
 	            })
 	    });
-	else console.log('Test StockLocations.update skipped: missing required test data')
-	else console.log('Test StockLocations.update skipped: missing required resource permission')
+	else utils.missingRequiredData(SPEC_NAME, 'update')
+	else utils.missingRequiredPermission(SPEC_NAME, 'update')
 
 
 	// StockLocations.list
@@ -67,7 +75,7 @@ describe("StockLocations", function() {
 	                expect(response.get(['id']).length).toBeGreaterThan(0)
 	            })
 	    });
-	else console.log('Test StockLocations.list skipped: missing required resource permission')
+	else utils.missingRequiredPermission(SPEC_NAME, 'list')
 
   });
   

@@ -1,13 +1,17 @@
-// File automatically generated at 01/03/2019 18:57:42 by commercelayer-js-sdk-codegen
+// File automatically generated at 02/03/2019 19:27:59 by commercelayer-js-sdk-codegen
 
 
 const commercelayer = require('../index')
 const permissions = require('./support/permissions')
 const config = require('./support/config')
 const data = require('./support/data')
+const utils = require('./support/utils')
 
 
-describe("LineItemOptions", function() {
+const SPEC_NAME = "LineItemOptions";
+
+
+describe(SPEC_NAME, function() {
 
     beforeAll(function() {
         commercelayer.initialize(config);
@@ -21,11 +25,13 @@ describe("LineItemOptions", function() {
 	    it("create", function() {
 	        return commercelayer.createLineItemOption(new commercelayer.model.LineItemOption().setFields(data.LineItemOptions.create))
 	            .then(response => {
-	                expect(response.get('id')).not.toBeNull();                
+	                const id = response.get('id');
+					console.log('Created LineItemOption with id ' + id)
+					expect(id).not.toBeNull();
 	            })
 	    });
-	else console.log('Test LineItemOptions.create skipped: missing required test data')
-	else console.log('Test LineItemOptions.create skipped: missing required resource permission')
+	else utils.missingRequiredData(SPEC_NAME, 'create')
+	else utils.missingRequiredPermission(SPEC_NAME, 'create')
 
 
 	// LineItemOptions.retrieve
@@ -34,29 +40,31 @@ describe("LineItemOptions", function() {
 	    it("retrieve", function() {
 	        return commercelayer.retrieveLineItemOption(data.LineItemOptions.retrieve.id)
 	            .then(response => {
-	                expect(response.get('id')).toBe(data.LineItemOptions.retrieve.id)
+	                expect(response.get('id')).toBe(data.LineItemOptions.retrieve.id.toString())
 	            })
 	    });
-	else console.log('Test LineItemOptions.retrieve skipped: missing required test data')
-	else console.log('Test LineItemOptions.retrieve skipped: missing required resource permission')
+	else utils.missingRequiredData(SPEC_NAME, 'retrieve')
+	else utils.missingRequiredPermission(SPEC_NAME, 'retrieve')
 
 
 	// LineItemOptions.update
 	if (permissions.LineItemOptions && permissions.LineItemOptions.includes('update'))
 	if (data.LineItemOptions && data.LineItemOptions.update)
 	    it("update", function() {
-	        return commercelayer.updateLineItemOption(data.LineItemOptions.update.id, new commercelayer.model.LineItemOption().setFields(data.LineItemOptions.update))
+	    	let qf = utils.buildQueryFilter(data.LineItemOptions.update);
+			let line_item_option = new commercelayer.model.LineItemOption().setFields(data.LineItemOptions.update);
+	        return commercelayer.updateLineItemOption(data.LineItemOptions.update.id, line_item_option, qf)
 	            .then(response => {
 	                Object.keys(data.LineItemOptions.update).forEach(field => {
-	                	if (commercelayer.model.helper.isApiResource(data.LineItemOptions.update[field])) {
-							console.log('Evaluation of resource object not supported ['  + field + ']')
-						}
-	                    else expect(response.get(field)).toBe(data.LineItemOptions.update[field])
+	                	if (commercelayer.model.helper.isApiResource(data.LineItemOptions.update[field]))
+							expect(response.get([field+'.id'])[field].id).toBe(data.LineItemOptions.update[field].id.toString())
+						else
+							expect(utils.toString(response.get(field))).toBe(data.LineItemOptions.update[field].toString())
 	                })
 	            })
 	    });
-	else console.log('Test LineItemOptions.update skipped: missing required test data')
-	else console.log('Test LineItemOptions.update skipped: missing required resource permission')
+	else utils.missingRequiredData(SPEC_NAME, 'update')
+	else utils.missingRequiredPermission(SPEC_NAME, 'update')
 
 
 	// LineItemOptions.list
@@ -67,7 +75,7 @@ describe("LineItemOptions", function() {
 	                expect(response.get(['id']).length).toBeGreaterThan(0)
 	            })
 	    });
-	else console.log('Test LineItemOptions.list skipped: missing required resource permission')
+	else utils.missingRequiredPermission(SPEC_NAME, 'list')
 
   });
   
