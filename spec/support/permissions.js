@@ -3,67 +3,67 @@
 
 module.exports = {
 
-	Addresses : ['create', 'retrieve', 'update', 'list'],
+	Addresses : ['create', 'retrieve', 'update', 'delete', 'list', 'all'],
 
-	CreditCards : [/*'create', 'retrieve', 'update', */'list'],
+	CreditCards : ['create', 'retrieve', 'update', 'delete', 'list', 'all'],
 
-	CustomerAddresses : [/*'create', 'retrieve', 'update', */'list'],
+	CustomerAddresses : ['create', 'retrieve', 'update', 'delete', 'list', 'all'],
 
-	CustomerGroups : [/*'create', 'retrieve', 'update', */'list'],
+	CustomerGroups : ['create', 'retrieve', 'update', 'delete', 'list', 'all'],
 
-	CustomerPasswordResets : [/*'create', 'retrieve', 'update', */'list'],
+	CustomerPasswordResets : ['create', 'retrieve', 'update', 'delete', 'list', 'all'],
 
-	CustomerPaymentSources : [/*'create', 'retrieve', 'update', */'list'],
+	CustomerPaymentSources : ['create', 'retrieve', 'update', 'delete', 'list', 'all'],
 
-	CustomerSubscriptions : [/*'create', 'retrieve', 'update', */'list'],
+	CustomerSubscriptions : ['create', 'retrieve', 'update', 'delete', 'list', 'all'],
 
-	Customers : [/*'create', 'retrieve', 'update', */'list'],
+	Customers : ['create', 'retrieve', 'update', 'delete', 'list', 'all'],
 
-	DeliveryLeadTimes : [/*'create', 'retrieve', 'update', */'list'],
+	DeliveryLeadTimes : ['create', 'retrieve', 'update', 'delete', 'list', 'all'],
 
-	InventoryModels : [/*'create', 'retrieve', 'update', */'list'],
+	InventoryModels : ['create', 'retrieve', 'update', 'delete', 'list', 'all'],
 
-	LineItemOptions : [/*'create', 'retrieve', 'update', */'list'],
+	LineItemOptions : ['create', 'retrieve', 'update', 'delete', 'list', 'all'],
 
-	LineItems : [/*'create', 'retrieve', 'update', */'list'],
+	LineItems : ['create', 'retrieve', 'update', 'delete', 'list', 'all'],
 
-	Markets : [/*'create', 'retrieve', 'update', */'list'],
+	Markets : ['create', 'retrieve', 'update', 'delete', 'list', 'all'],
 
-	Merchants : [/*'create', 'retrieve', 'update', */'list'],
+	Merchants : ['create', 'retrieve', 'update', 'delete', 'list', 'all'],
 
-	Orders : [/*'create', 'retrieve', 'update', */'list'],
+	Orders : ['create', 'retrieve', 'update', 'delete', 'list', 'all'],
 
-	Parcels : [/*'create', 'retrieve', 'update', */'list'],
+	Parcels : ['create', 'retrieve', 'update', 'delete', 'list', 'all'],
 
-	PaymentMethods : [/*'create', 'retrieve', 'update', */'list'],
+	PaymentMethods : ['create', 'retrieve', 'update', 'delete', 'list', 'all'],
 
-	PaypalPayments : [/*'create', /*'retrieve', 'update', */'list'],
+	PaypalPayments : ['create', 'retrieve', 'update', 'delete', 'list', 'all'],
 
-	PriceLists : [/*'create', 'retrieve', 'update', */'list'],
+	PriceLists : ['create', 'retrieve', 'update', 'delete', 'list', 'all'],
 
-	Prices : [/*'create', 'retrieve', 'update', */'list'],
+	Prices : ['create', 'retrieve', 'update', 'delete', 'list', 'all'],
 
-	Shipments : [/*'create', 'retrieve', 'update', 'list'*/],
+	Shipments : ['create', 'retrieve', 'update', 'delete', 'list', 'all'],
 
-	ShippingCategories : [/*'create', 'retrieve', 'update', */'list'],
+	ShippingCategories : ['create', 'retrieve', 'update', 'delete', 'list', 'all'],
 
-	ShippingMethods : [/*'create', 'retrieve', 'update', */'list'],
+	ShippingMethods : ['create', 'retrieve', 'update', 'delete', 'list', 'all'],
 
-	ShippingZones : [/*'create', 'retrieve', 'update', */'list'],
+	ShippingZones : ['create', 'retrieve', 'update', 'delete', 'list', 'all'],
 
-	SkuOptions : [/*'create', 'retrieve', 'update', */'list'],
+	SkuOptions : ['create', 'retrieve', 'update', 'delete', 'list', 'all'],
 
-	Skus : [/*'create', 'retrieve', 'update', */'list'],
+	Skus : ['create', 'retrieve', 'update', 'delete', 'list', 'all'],
 
-	StockItems : [/*'create', 'retrieve', 'update', */'list'],
+	StockItems : ['create', 'retrieve', 'update', 'delete', 'list', 'all'],
 
-	StockLevels : [/*'create', 'retrieve', 'update', */'list'],
+	StockLevels : ['create', 'retrieve', 'update', 'delete', 'list', 'all'],
 
-	StockLocations : [/*'create', 'retrieve', 'update', */'list'],
+	StockLocations : ['create', 'retrieve', 'update', 'delete', 'list', 'all'],
 
-	Webhooks : [/*'create', 'retrieve', 'update', */'list'],
+	Webhooks : ['create', 'retrieve', 'update', 'delete', 'list', 'all'],
 
-	WireTransfers : [/*'create', 'retrieve', 'update', */'list'],
+	WireTransfers : ['create', 'retrieve', 'update', 'delete', 'list', 'all']
 
 }
 

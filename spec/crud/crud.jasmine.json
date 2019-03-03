@@ -1,0 +1,11 @@
+{
+  "spec_dir": "spec/crud",
+  "spec_files": [
+    "**/*crud.[sS]pec.js"
+  ],
+  "helpers": [
+    "helpers/**/*.js"
+  ],
+  "stopSpecOnExpectationFailure": false,
+  "random": true
+}
