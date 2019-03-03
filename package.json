@@ -5,6 +5,7 @@
   "main": "./index.js",
   "scripts": {
     "test": "jasmine --reporter=jasmine-console-reporter",
+    "test-crud": "jasmine --reporter=jasmine-console-reporter --config=spec/support/jasmine.json",
     "build": "webpack --progress",
     "watch": "webpack --progress --watch"
   },

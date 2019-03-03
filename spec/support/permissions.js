@@ -3,7 +3,7 @@
 
 module.exports = {
 
-	Addresses : [/*'create', 'retrieve', 'update', */'list'],
+	Addresses : ['create', 'retrieve', 'update', 'list'],
 
 	CreditCards : [/*'create', 'retrieve', 'update', */'list'],
 
@@ -37,7 +37,7 @@ module.exports = {
 
 	PaymentMethods : [/*'create', 'retrieve', 'update', */'list'],
 
-	PaypalPayments : [/*'create', 'retrieve', 'update', */'list'],
+	PaypalPayments : [/*'create', /*'retrieve', 'update', */'list'],
 
 	PriceLists : [/*'create', 'retrieve', 'update', */'list'],
 

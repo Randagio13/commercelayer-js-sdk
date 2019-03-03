@@ -223,6 +223,23 @@ const Merchants = {
 }
 
 
+// PaypalPayments Test Data
+const PaypalPayments = {
+    create: {
+        return_url: "https://yourbrand.com/thankyou",
+        cancel_url: "https://yourbrand.com/checkout/payment",
+        order: new model.Order(9839)
+    },
+    retrieve: {
+        id: "233"
+    },
+    update: {
+        id: "233",
+        name: "Merchant " + utils.randomWords()
+    }
+}
+
+
 // PriceLists Test Data
 const PriceLists = {
     create: {
@@ -388,6 +405,7 @@ module.exports = {
   InventoryModels,
   Markets,
   Merchants,
+  PaypalPayments,
   PriceLists,
   Shipments,
   ShippingCategories,
