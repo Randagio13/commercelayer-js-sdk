@@ -6,8 +6,7 @@ const crud = require('./crud.core')
 const suites = require('./crud.suite');
 
 
-commercelayer.initialize(config);
-commercelayer.settings.response_type = 'normalized'
+config.init(suites);
 
 
 Object.keys(suites).forEach(suite => {

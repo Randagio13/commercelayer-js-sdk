@@ -6,6 +6,7 @@
   "scripts": {
     "test": "jasmine --reporter=jasmine-console-reporter",
     "test-crud": "jasmine --reporter=jasmine-console-reporter --config=spec/crud/crud.jasmine.json",
+    "test-read": "jasmine --reporter=jasmine-console-reporter --config=spec/read/read.jasmine.json",
     "build": "webpack --progress",
     "watch": "webpack --progress --watch"
   },

@@ -6,77 +6,77 @@ const utils = require('../support/utils')
 
 let tests = {
 
-    create : (spec, model) => {
+    create : (suite, model) => {
 
         const test = 'create';
   
-        if (permissions[spec] && permissions[spec].includes(test))
-        if (data[spec] && data[spec][test])
+        if (permissions[suite] && permissions[suite].includes(test))
+        if (data[suite] && data[suite][test])
             it(test, function() {
-                return commercelayer[test+model](new commercelayer.model[model]().setFields(data[spec][test]))
+                return commercelayer[test+model](new commercelayer.model[model]().setFields(data[suite][test]))
                     .then(response => {
                         const id = response.get('id');
                         expect(id).not.toBeNull();
                     })
             });
-        else utils.missingRequiredData(spec, test)
-        else utils.missingRequiredPermission(spec, test)
+        else utils.missingRequiredData(suite, test)
+        else utils.missingRequiredPermission(suite, test)
 	
     },
 
-    retrieve : (spec, model) => {
+    retrieve : (suite, model) => {
     
         const test = 'retrieve';
         
-        if (permissions[spec] && permissions[spec].includes(test))
-        if (data[spec] && data[spec][test])
+        if (permissions[suite] && permissions[suite].includes(test))
+        if (data[suite] && data[suite][test])
             it(test, function() {
-                return commercelayer[test+model](data[spec][test].id)
+                return commercelayer[test+model](data[suite][test].id)
                     .then(response => {
-                        expect(response.get('id')).toBe(data[spec][test].id.toString())
+                        expect(response.get('id')).toBe(data[suite][test].id.toString())
                     })
             });
-        else utils.missingRequiredData(spec, test)
-        else utils.missingRequiredPermission(spec, test)
+        else utils.missingRequiredData(suite, test)
+        else utils.missingRequiredPermission(suite, test)
     
     },
     
-    update : (spec, model) => {
+    update : (suite, model) => {
 
         const test = 'update';
 
-        if (permissions[spec] && permissions[spec].includes(test))
-        if (data[spec] && data[spec][test])
+        if (permissions[suite] && permissions[suite].includes(test))
+        if (data[suite] && data[suite][test])
             it(test, function() {
-                let qf = utils.buildQueryFilter(data[spec][test]);
-                let res = new commercelayer.model[model]().setFields(data[spec][test]);
-                return commercelayer[test+model](data[spec][test].id, res, qf)
+                let qf = utils.buildQueryFilter(data[suite][test]);
+                let res = new commercelayer.model[model]().setFields(data[suite][test]);
+                return commercelayer[test+model](data[suite][test].id, res, qf)
                     .then(response => {
-                        Object.keys(data[spec][test]).forEach(field => {
-                            if (commercelayer.model.helper.isApiResource(data[spec][test][field]))
-                                expect(response.get([field+'.id'])[field].id).toBe(data[spec][test][field].id.toString())
+                        Object.keys(data[suite][test]).forEach(field => {
+                            if (commercelayer.model.helper.isApiResource(data[suite][test][field]))
+                                expect(response.get([field+'.id'])[field].id).toBe(data[suite][test][field].id.toString())
                             else
-                                expect(utils.toString(response.get(field))).toBe(data[spec][test][field].toString())
+                                expect(utils.toString(response.get(field))).toBe(data[suite][test][field].toString())
                         })
                     })
             });
-        else utils.missingRequiredData(spec, test)
-        else utils.missingRequiredPermission(spec, test)
+        else utils.missingRequiredData(suite, test)
+        else utils.missingRequiredPermission(suite, test)
 
 	},
 
-    list : (spec, model) => {
+    list : (suite, model) => {
 
         const test = 'list';
 
-        if (permissions[spec] && permissions[spec].includes(test))
+        if (permissions[suite] && permissions[suite].includes(test))
             it(test, function() {
-                return commercelayer[test+spec]()
+                return commercelayer[test+suite]()
                     .then(response => {
                         expect(response.get(['id']).length).toBeGreaterThan(0)
                     })
             });
-        else utils.missingRequiredPermission(spec, test)
+        else utils.missingRequiredPermission(suite, test)
     }
 
 }
@@ -84,11 +84,11 @@ let tests = {
 
 module.exports = tests;
 
-module.exports.test = (spec, test, model) => {
+module.exports.test = (suite, test, model) => {
     switch (test) {
-        case 'create': return tests.create(spec, model);
-        case 'retrieve': return tests.retrieve(spec, model);
-        case 'update': return tests.update(spec, model);
+        case 'create': return tests.create(suite, model);
+        case 'retrieve': return tests.retrieve(suite, model);
+        case 'update': return tests.update(suite, model);
         case 'delete': return;
     }
 }

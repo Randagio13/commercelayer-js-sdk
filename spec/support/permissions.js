@@ -21,6 +21,8 @@ module.exports = {
 
 	DeliveryLeadTimes : ['create', 'retrieve', 'update', 'delete', 'list', 'all'],
 
+	Imports : ['create', 'retrieve', 'update', 'delete', 'list', 'all'],
+
 	InventoryModels : ['create', 'retrieve', 'update', 'delete', 'list', 'all'],
 
 	LineItemOptions : ['create', 'retrieve', 'update', 'delete', 'list', 'all'],

@@ -1,2 +1,4 @@
 
-console.log(Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15))
+const commercelayer = require('../index')
+
+console.log(commercelayer.model.helper.allElements())
