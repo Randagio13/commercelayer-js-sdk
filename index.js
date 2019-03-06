@@ -6,3 +6,5 @@ module.exports.model = require('./lib/model')
 
 // QueryFilter Extension
 module.exports.query = require('./lib/query')
+// QueryExpression Extension
+module.exports.queryx = require('./lib/queryx')
