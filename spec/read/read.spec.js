@@ -1,4 +1,3 @@
-// File automatically generated at 02/03/2019 19:27:59 by commercelayer-js-sdk-codegen
 
 const commercelayer = require('../../index')
 const suites = require('./read.suite');

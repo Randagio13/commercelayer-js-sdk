@@ -8,3 +8,6 @@ module.exports.model = require('./lib/model')
 module.exports.query = require('./lib/query')
 // QueryExpression Extension
 module.exports.queryx = require('./lib/queryx')
+
+// CommerceLayer constants
+module.exports.const = require('./lib/const')
