@@ -223,6 +223,23 @@ const Merchants = {
 }
 
 
+// Orders
+const Orders = {
+    create: {
+        market: new model.Market(185)
+    },
+    retrieve: {
+        id: "9839"
+    },
+    update: {
+        id: "9839",
+        guest: false,
+        customer_email: "pippo@server.com",
+        market: new model.Market(185)
+    }
+};
+
+
 // PaypalPayments Test Data
 const PaypalPayments = {
     create: {
@@ -375,23 +392,6 @@ const StockLocations = {
 
 
 
-const Orders = {
-    retrieve: {
-        id: "9839"
-    },
-    update: {
-        id: "9839",
-        guest: false,
-        customer_email: "pippo@server.com",
-        market: new model.Market(185)
-    },
-    create: {
-        market: new model.Market(185)
-    }
-};
-
-
-
 module.exports = {
   Addresses,
   CreditCards,
@@ -405,6 +405,7 @@ module.exports = {
   InventoryModels,
   Markets,
   Merchants,
+  Orders,
   PaypalPayments,
   PriceLists,
   Shipments,
