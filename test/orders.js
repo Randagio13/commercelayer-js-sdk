@@ -5,13 +5,11 @@ const test = require('./test')
 
 commercelayer.initialize(test.config);
 
-commercelayer.settings.response_type = commercelayer.const.ResponseType.Model;
-
-// let qf = new commercelayer.query.QueryFilter();
+let qf = new commercelayer.query.QueryFilter();
 // qf.include('market', 'customer', 'line_items');
 
-test.separator('listOrders()');
-test.execute(commercelayer.listOrders());
+// test.separator('listOrders()');
+// test.execute(commercelayer.listOrders());
 
 
 // test.separator('retrieveOrder()');
@@ -52,5 +50,5 @@ test.execute(commercelayer.listOrders());
 // test.execute(commercelayer.createOrder(order));
 
 
-// test.separator('allOrders()');
-// test.execute(commercelayer.allOrders());
+test.separator('allOrders()');
+test.execute(commercelayer.allOrders());

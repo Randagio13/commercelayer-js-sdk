@@ -35,4 +35,4 @@ commercelayer.initialize(test.config);
 
 
 test.separator('allSkus()');
-test.execute(commercelayer.allSkus());
+test.execute(commercelayer.allSkus(undefined, { response_type : 'normalized' }));
