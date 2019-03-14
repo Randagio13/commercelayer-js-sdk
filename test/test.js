@@ -2,6 +2,7 @@
 const util = require('util')
 const commercelayer = require('../index')
 
+
 commercelayer.settings.debug = true;
 commercelayer.settings.console = true;
 commercelayer.settings.trace = true;
@@ -9,11 +10,12 @@ commercelayer.settings.trace = true;
 const log_enabled = commercelayer.settings.debug && commercelayer.settings.console;
 const inspect_enabled = true;
 
+const testAuth = require('./test.auth')
+
 const cfg = {
-    // client_id: '',
-    // market_id: '',
-    client_id: '',
-	client_secret: '',
+    authentication : testAuth,
+    client_id: null,
+	client_secret: null,
     market_id: null,
     base_url : "https://static-commerce.commercelayer.io",
 }
