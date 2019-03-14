@@ -52,4 +52,4 @@ let qf = new commercelayer.query.QueryFilter();
 
 test.separator('allOrders()');
 qf.filter('market_id', 185)
-test.execute(commercelayer.allOrders(qf, {response_type: 'jsonapi'}));
+test.execute(commercelayer.allOrders(qf, {response_type: 'model'}));
