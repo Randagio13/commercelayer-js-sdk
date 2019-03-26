@@ -16,6 +16,7 @@ let skuAttributes = [
   ]
 
 let qf = commercelayer.query.newInstance().include('prices')
+qf.pageNumber(4)
 
 
 // test.separator('listSkus()');

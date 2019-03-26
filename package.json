@@ -1,6 +1,6 @@
 {
   "name": "@commercelayer/sdk",
-  "version": "1.6.2",
+  "version": "1.6.3",
   "description": "The Official Commerce Layer JS SDK",
   "main": "./index.js",
   "scripts": {
