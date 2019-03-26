@@ -5,6 +5,19 @@ const test = require('./test')
 
 commercelayer.initialize(test.config);
 
+
+let skuAttributes = [
+    'id',
+    'code',
+    'prices.formatted_amount',
+    'prices.formatted_compare_at_amount',
+    'prices.amount_cents',
+    'prices.compare_at_amount_cents'
+  ]
+
+let qf = commercelayer.query.newInstance().include('prices')
+
+
 // test.separator('listSkus()');
 
 // api/skus?filter[codes]=' + skuCodes.join(',') +'&include=prices&page[size]=25
@@ -35,4 +48,13 @@ commercelayer.initialize(test.config);
 
 
 test.separator('allSkus()');
-test.execute(commercelayer.allSkus(undefined, { response_type : 'normalized' }));
+test.execute(commercelayer.allSkus(qf, { response_type : 'normalized' }))
+    .then(data => {
+          test.inspect(data.get(skuAttributes))
+    })
+
+// test.separator('listSkus()');
+// test.execute(commercelayer.listSkus(qf, { response_type : 'normalized' }))
+//     .then(data => {
+//             test.inspect(data.get(skuAttributes))
+//     })
